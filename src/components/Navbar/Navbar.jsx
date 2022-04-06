@@ -134,6 +134,38 @@ const Navbar = () => {
                     >
                         About
                     </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ marginX: 2 }}
+                    >
+                        Categories
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ marginX: 2 }}
+                    >
+                        News
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ marginX: 2 }}
+                    >
+                        Contact us
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ marginX: 2 }}
+                    >
+                        Cart
+                    </Typography>
                     <IconButton
                         size="large"
                         edge="end"
@@ -145,7 +177,7 @@ const Navbar = () => {
                     >
                         <AccountCircle />
                     </IconButton>
-                 
+
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}

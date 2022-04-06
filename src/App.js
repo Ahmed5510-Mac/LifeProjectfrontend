@@ -10,6 +10,7 @@ import themeDark from './theme/DarkTheme/DarkTheme';
 import themeLight from './theme/LightTheme/LightTheme';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -27,6 +28,7 @@ const App = () => {
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <Footer/>
       </ThemeProvider>
     </>
   );
