@@ -17,7 +17,7 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={light ? themeLight : themeDark}>
-         {/* <Navbar />  */}
+        <Navbar />
         {/*<CssBaseline /> */}
        {/* <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button> */}
         <BrowserRouter>
