@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Rating from '@mui/material/Rating';
-
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({

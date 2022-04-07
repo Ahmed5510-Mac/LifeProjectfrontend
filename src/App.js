@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import Login from './pages/Login/Login';
 import Registration from './pages/Registration/Registration';
 import NotFound from './pages/NotFound/NotFound';
 import { ThemeProvider } from '@mui/material/styles';
@@ -17,18 +16,18 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={light ? themeLight : themeDark}>
-        <Navbar />
-        <CssBaseline />
-        <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button>
+         {/* <Navbar />  */}
+        {/*<CssBaseline /> */}
+       {/* <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button> */}
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Registration />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-        <Footer/>
+ {/*  <Footer/>  */}
+
       </ThemeProvider>
     </>
   );
