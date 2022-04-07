@@ -10,6 +10,7 @@ import themeLight from './theme/LightTheme/LightTheme';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from './components/Footer/Footer';
+import Contact from './pages/Contact/Contact.jsx' 
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -23,6 +24,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Registration />} />
+            <Route path='/contactus' element={<Contact />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
