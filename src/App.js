@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact.jsx' 
+import Product from './pages/product/product';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -28,6 +29,7 @@ const App = () => {
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        
   <Footer/> 
 
       </ThemeProvider>
