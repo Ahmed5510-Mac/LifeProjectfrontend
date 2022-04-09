@@ -88,7 +88,7 @@ export default function Navbar() {
           </div>
           <div className="iconLscreen">
           <NavLink to="/register" className="btn   rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </NavLink>
-            <NavLink to="/cart" className="btn mx-2 rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark position-relative"> <span className='bg-warning p-2 position-absolute rounded-circle'>{counter}</span></span> </NavLink>
+            <NavLink to="/cart" className="btn mx-2 rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark position-relative"><span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">{counter}</span></span> </NavLink>
           </div>
         </div>
       </div>

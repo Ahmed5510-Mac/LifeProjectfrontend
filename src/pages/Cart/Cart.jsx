@@ -2,16 +2,12 @@ import product from "../../assets/2.png";
 import "./cart.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { increment ,decrement} from "../../store/cart/cartSlice";
-import GreenAlert from "../../components/cart/greenAlert"
+
 const Cart = () => {
     const counter =  useSelector((data)=>data.cart.counterValue)
     const dispatch = useDispatch()
-    const deleteProduct=() => {
-    document.querySelector(".product-details").classList.add("d-none")
-}
     return (
         <>
-
             <div className="alert alert-danger w-100 d-none " role="alert">
                 Invalid added
             </div>
@@ -40,12 +36,12 @@ const Cart = () => {
                                 {/* cart Footer */}
                         <div className="cartfooter d-flex justify-content-between align-items-center mt-2">
                             <span className="text-danger mt-2 ms-2" role="button">
-                                <i className="fa-solid fa-trash-can  ps-2" onClick={()=>deleteProduct()}> </i> remove
+                                <i className="fa-solid fa-trash-can  ps-2"> </i> remove
                             </span>
                             <span className="d-flex align-items-center">
                                 <i  className="fa-solid fa-circle-minus fs-2" role="button" onClick={()=> counter == 0 ? "" :  dispatch(decrement(counter))}></i> 
                                     <span className="p-3">{counter}</span>
-                                <i  className="fa-solid fa-circle-plus fs-2" role="button" onClick={()=>{<GreenAlert message="Hello" display="d-block"/>;dispatch(increment(counter))}}></i> 
+                                <i  className="fa-solid fa-circle-plus fs-2" role="button" onClick={()=>dispatch(increment(counter))}></i> 
                                
                             </span>
                         </div>
