@@ -13,14 +13,13 @@ import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact.jsx';
 import Cart from './pages/Cart/Cart';
 import About from './pages/About/About';
-import Product from './pages/product/product';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
   return (
     <>
       <ThemeProvider theme={light ? themeLight : themeDark}>
-        {/*<CssBaseline /> */}
+        <CssBaseline />
         {/* <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button> */}
         <BrowserRouter>
           <Navbar />

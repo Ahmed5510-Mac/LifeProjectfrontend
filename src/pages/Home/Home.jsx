@@ -1,28 +1,53 @@
-import ProductCard from "../../components/ProductCard/ProductCard";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Slider from "../../components/Slider/Slider";
-import ProductContainer from './../../components/ProductContainer/ProductContainer';
 import Form from './../../components/Form/Form';
+
+import Draft from "../../components/Draft/draft";
+import SliderComponent from "../../components/offers/offers";
+import OffersDraft from "../../components/offers/offersSingleDraftGrid";
+import Deatails2 from "../details/details";
+import SeeAllOffers from "../offers/offers"
 
 const Home = () => {
   return (
     <>
       <Slider />
-  <ProductContainer/>
-   <Form/>
-      {/*
-        <Container sx={{ marginY: 5 }}>
-        <Grid container spacing={5}>
-          <ProductCard/>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </Grid>
-      </Container> 
-      */
-      }
+        
+  
+   <Container sx={{ marginY: 5 }}>
+        <Draft
+        imageSrc={"https://picsum.photos/1120/300"}
+        />
+      </Container>
 
+      <Container>
+        <OffersDraft colorStyle={"#e61601"} textColor={"white"} />
+      </Container>
+      <Container>
+        <SliderComponent colorStyle={"#e61601"} textColor={"white"} />
+      </Container>
+      <Container>
+        <OffersDraft colorStyle={"#FEE2CC"} textColor={"black"} />
+      </Container>
+      <Container>
+        <SliderComponent colorStyle={"#FEE2CC"} textColor={"black"} />
+      </Container>
+      <Container>
+        <OffersDraft colorStyle={"#00b4d8"} textColor={"white"} />
+      </Container>
+      <Container>
+        <SliderComponent colorStyle={"#00b4d8"} textColor={"white"} />
+      </Container>
+
+      <Container>
+        <Deatails2 />
+      </Container>
+
+      <Container sx={{ marginY: 5 }}>
+        <SeeAllOffers />
+      </Container>
+
+      <Form/>
     </>
   );
 };
