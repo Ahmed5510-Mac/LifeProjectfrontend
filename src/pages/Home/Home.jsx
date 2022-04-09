@@ -2,7 +2,7 @@
 // import Container from "@mui/material/Container";
 // import Grid from "@mui/material/Grid";
 import Slider from "../../components/Slider/Slider";
-
+import { useSelector } from "react-redux";
 const Home = () => {
   return (
     <>

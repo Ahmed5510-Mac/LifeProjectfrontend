@@ -6,20 +6,23 @@ import units from "../../assets/units.png"
 import draugs from "../../assets/2.png"
 import News from "../../assets/4.png"
 import other from "../../assets/denta1.png"
- import mosh from "../../assets/6.png"
+import mosh from "../../assets/6.png"
+import {NavLink} from "react-router-dom"
+import { useSelector } from 'react-redux'
 import "./Navbar.css"
 export default function Navbar() {
+  const counter = useSelector((state)=>state.cart.counterValue)
   return (
     <nav className="navbar sticky-top navbar-expand-lg ">
       <div className="container-fluid">
-        <a className="Cnavbar-brand" href="#">
+        <NavLink className="Cnavbar-brand" to="/">
           <img className='w-50 d-sm-w-25'  src={logo} alt=""/>
-        </a>
+        </NavLink>
         {/* =====element will visable in mobile screen===== */}
         <input className='form-control  mobilesearch  w-50 d-lg-mx-auto ' placeholder='search' type="text" />
         <div className="iconmobile">
-        <a href="" className="btn  rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </a>
-          <a href="" className="btn mx-2  rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark"></span> </a>
+        <NavLink to="/register" className="btn  rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </NavLink>
+          <NavLink to="/cart" className="btn mx-2  rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark position-relative"><span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">{counter}</span></span> </NavLink>
           </div>
           {/* ----navbar------ */}
         <button className="navbar-toggler btntoggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,10 +31,10 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto  mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link p-lg-3 active" aria-current="page" href="#">Home</a>
+              <NavLink className="nav-link p-lg-3 active" aria-current="page" to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link p-lg-3"  href="#">About Us</a>
+              <NavLink className="nav-link p-lg-3"  to="/about">About Us</NavLink>
             </li>
             <li className="nav-item Categories position-relative">
               <a className="nav-link  p-lg-3" href="#">Categories</a>
@@ -84,9 +87,8 @@ export default function Navbar() {
             </div>
           </div>
           <div className="iconLscreen">
-          <a href="" className="btn   rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </a>
-          <a href="" className="btn mx-2 rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark"></span> </a>
-            
+          <NavLink to="/register" className="btn   rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </NavLink>
+            <NavLink to="/cart" className="btn mx-2 rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark position-relative"> <span className='bg-warning p-2 position-absolute rounded-circle'>{counter}</span></span> </NavLink>
           </div>
         </div>
       </div>
