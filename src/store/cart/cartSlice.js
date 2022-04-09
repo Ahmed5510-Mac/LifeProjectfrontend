@@ -10,7 +10,7 @@ export const cartSlice = createSlice({
     reducers:{
         removeItem:function(state,{payload})
         {
-            state.items = state.items.filter((item)=>item.id != payload.id)
+            state.items = state.items.filter((item)=>item.id !== payload.id)
         },
         discount:function(state,{payload})
         {

@@ -10,9 +10,9 @@ import themeLight from './theme/LightTheme/LightTheme';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from './components/Footer/Footer';
-import Contact from './pages/Contact/Contact.jsx' 
-import Cart from "./pages/Cart/Cart"
-import About from "./pages/About/About"
+import Contact from './pages/Contact/Contact.jsx';
+import Cart from './pages/Cart/Cart';
+import About from './pages/About/About';
 import Product from './pages/product/product';
 
 const App = () => {
@@ -21,20 +21,20 @@ const App = () => {
     <>
       <ThemeProvider theme={light ? themeLight : themeDark}>
         {/*<CssBaseline /> */}
-       {/* <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button> */}
+        {/* <Button onClick={() => setLight((prev) => !prev)}>Toggle Theme</Button> */}
         <BrowserRouter>
-        <Navbar />
+          <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Registration />} />
             <Route path='/contactus' element={<Contact />} />
             <Route path='/about' element={<About />} />
+            <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />
-            <Route path='/cart' element={<Cart/>}/>
+       
           </Routes>
         </BrowserRouter>
-          <Footer/> 
-
+        <Footer />
       </ThemeProvider>
     </>
   );
