@@ -20,8 +20,10 @@ const Login = ({ handleChange }) => {
     const { isLoading, user, isSuccess, isError, message } = useSelector((state) => state.auth)
 
     const [formData, setFormData] = useState({
-        customerEmail: '',
-        customerPassword: '',
+        // customerEmail: '',
+        // customerPassword: '',
+        email:'',
+        password:''
     })
 
     useEffect(() => {
@@ -44,7 +46,8 @@ const Login = ({ handleChange }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const userData = {
-            customerEmail, customerPassword
+            // customerEmail, customerPassword
+            email,password
         }
         dispatch(login(userData))
     }
@@ -52,18 +55,18 @@ const Login = ({ handleChange }) => {
         return <Spinner />
     }
 
-    const { customerEmail, customerPassword } = formData
+    const { email,password} = formData
 
     return (<>
         <form onSubmit={handleSubmit}>
 
             <div>
                 <label htmlFor="">customerEmail</label>
-                <input type="email" name='customerEmail' value={customerEmail} onChange={onChange} />
+                <input type="email" name='email' value={email} onChange={onChange} />
             </div>
             <div>
                 <label htmlFor="">customerPassword</label>
-                <input type="text" name='customerPassword' value={customerPassword} onChange={onChange} />
+                <input type="text" name='password' value={password} onChange={onChange} />
             </div>
 
             <button type="submit">submit</button>

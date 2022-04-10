@@ -5,10 +5,11 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Delivery from "../../components/delivery/delivery";
 import ImageGallaryComponent from "../../components/Deatails/detailsScrollerCarasol";
-import { Rating, Typography } from "@mui/material";
+import { Container, Rating, Typography } from "@mui/material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import DiscountCard from "../../components/Deatails/detailsDiscountCard";
 import CartButtons from "../../components/Deatails/detailsCartButton";
+import { useLocation } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -20,7 +21,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Deatails2() {
   const [value, setValue] = React.useState(2);
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
+    <Container sx={{marginY:"4%"}}>
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={8}>
@@ -79,5 +87,6 @@ export default function Deatails2() {
       </Grid>
       
     </Box>
+    </Container>
   );
 }

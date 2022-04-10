@@ -7,6 +7,8 @@ import { Box, CardActionArea, Rating } from "@mui/material";
 import SkillsProgress from "../offers/offersCardProgress";
 import tooth from "../../assets/tooth.jpg";
 import CartButtons from "../Deatails/detailsCartButton";
+import Deatails2 from "../../pages/details/details";
+import { useNavigate } from "react-router-dom";
 
 export default function OfferCard({
   productName,
@@ -18,10 +20,14 @@ export default function OfferCard({
 }) {
   
   let priceAfter = (priceBefore * discountPersentatge) / 100;
+  const navigate= useNavigate()
 
+  const onClick=()=>{
+   navigate('/details')
+ }
   return (
     <Card sx={{ maxWidth: 300,  marginY: 1 ,flexWrap: 'wrap' }}>
-      <CardActionArea>
+      <CardActionArea onClick={onClick}>
         <CardMedia
           sx={{
             display: "block",

@@ -56,7 +56,7 @@ export const login = createAsyncThunk(
       }
       return res.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(/*error.message,*/"ay 7aga");
     }
   }
 );

@@ -36,14 +36,6 @@ const Home = () => {
       <Container>
         <SliderComponent colorStyle={"#00b4d8"} textColor={"white"} />
       </Container>
-
-      <Container>
-        <Deatails2 />
-      </Container>
-
-      <Container sx={{ marginY: 5 }}>
-        <SeeAllOffers />
-      </Container>
     </>
   );
 };

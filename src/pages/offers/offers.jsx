@@ -5,6 +5,8 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import OfferCard from "../../components/offersCard/offersCard";
 import OffersContainer from "../../components/offersContainer/offersContainer";
+import { Container } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -15,8 +17,16 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function SeeAllOffers() {
+
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+
   return (
-    <>
+    <Container sx={{marginY:"5%"}}>
       <OffersContainer
         offerTime={"Time Left: 08h : 36m : 50s"}
         containerColor="#e61601"
@@ -149,6 +159,6 @@ export default function SeeAllOffers() {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </Container>
   );
 }

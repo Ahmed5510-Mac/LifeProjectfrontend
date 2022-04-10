@@ -6,14 +6,20 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import SkillsProgress from './offersCardProgress';
 import tooth from "../../assets/tooth.jpg";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function OffersCard({productName,maxNumOfProducts,numOfProductsThatReduced,priceBefore,discountPersentatge}) {
  let priceAfter=(priceBefore*discountPersentatge)/100
- 
+ const navigate= useNavigate()
+
+ const onClick=()=>{
+  navigate('/details')
+}
+
     return (
     <Card sx={{ maxWidth: 300 ,maxHeight:330 ,marginLeft:"2%"}}>
-      <CardActionArea>
+      <CardActionArea onClick={onClick}>
         <CardMedia
           sx={{
             display: "block",

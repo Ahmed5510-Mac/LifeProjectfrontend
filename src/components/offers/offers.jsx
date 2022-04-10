@@ -4,10 +4,11 @@ import Slider from "react-slick";
 import * as React from "react";
 import LeftArrow from "../../assets/left-arrow.svg";
 import RightArrow from "../../assets/right-arrow.svg";
-
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import OffersCard from "./offerCard";
+import { Link } from "react-router-dom";
 
 const SliderComponent = ({ colorStyle, textColor }) => {
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -103,7 +104,8 @@ const SliderComponent = ({ colorStyle, textColor }) => {
                 color: textColor,
               }}
             >
-              {"SEE All >"}{" "}
+              <Link style={{color:`${textColor}`}} to="/offers">See All <ArrowForwardIosOutlinedIcon fontSize="3%"/> </Link>
+
             </div>
           </Grid>
         </Grid>

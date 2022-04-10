@@ -14,6 +14,8 @@ import Contact from './pages/Contact/Contact.jsx';
 import Cart from './pages/Cart/Cart';
 import About from './pages/About/About';
 import { ToastContainer } from 'react-toastify';
+import Deatails2 from './pages/details/details';
+import SeeAllOffers from './pages/offers/offers';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -28,6 +30,9 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Registration />} />
             <Route path='/contactus' element={<Contact />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/details' element={<Deatails2/>} />
+            <Route path='/offers' element={<SeeAllOffers/>} />
             <Route path='/about' element={<About />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />
