@@ -7,11 +7,24 @@ import draugs from "../../assets/2.png"
 import News from "../../assets/4.png"
 import other from "../../assets/denta1.png"
 import mosh from "../../assets/6.png"
-import {NavLink} from "react-router-dom"
-import { useSelector } from 'react-redux'
+import {NavLink, useNavigate} from "react-router-dom"
+import { useSelector,useDispatch } from 'react-redux'
+import { reset,logout } from '../../store/auth/authSlice'
 import "./Navbar.css"
+
+
 export default function Navbar() {
   const counter = useSelector((state)=>state.cart.counterValue)
+ const navigate= useNavigate()
+ const dispatch= useDispatch()
+ const {user} = useSelector((state)=>state.auth)
+
+ const onLogout=()=>{
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+ }
+
   return (
     <nav className="navbar sticky-top navbar-expand-lg ">
       <div className="container-fluid">
@@ -37,7 +50,7 @@ export default function Navbar() {
               <NavLink className="nav-link p-lg-3"  to="/about">About Us</NavLink>
             </li>
             <li className="nav-item Categories position-relative">
-              <a className="nav-link  p-lg-3" href="#">Categories</a>
+              <a className="nav-link  p-lg-3" href="/">Categories</a>
                 {/*----------------------- megamenue ------------------- */}
               <div className="megMenue position-absolute">
                 {/*----- megamenue image ------ */}
@@ -49,29 +62,29 @@ export default function Navbar() {
                 <ul className="  mb-2 mb-lg-0">
                   <li className="nav-item d-flex  align-items-center">
                     <img  className="imageWidth" src={tools} alt="" />
-                    <a className="nav-link p-lg-3  active" aria-current="page" href="#">Tools</a>
+                    <a className="nav-link p-lg-3  active" aria-current="page" href="/">Tools</a>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={units} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="#">Units</a>
+                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">Units</a>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={draugs} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="#">Drugs</a>
+                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">Drugs</a>
                   </li>
                 </ul>
                 <ul>
                 <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={News} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="#">News</a>
+                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">News</a>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={other} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="#">other</a>
+                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">other</a>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={mosh} alt="" />
-                    <a className="p-lg-3 active text" aria-current="page" href="#"> mosharffen </a>
+                    <a className="p-lg-3 active text" aria-current="page" href="/"> mosharffen </a>
                   </li>
                 </ul>
                 </div>
@@ -87,8 +100,14 @@ export default function Navbar() {
             </div>
           </div>
           <div className="iconLscreen">
-          <NavLink to="/register" className="btn   rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </NavLink>
+           <NavLink to="/register" className="btn   rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </NavLink>
             <NavLink to="/cart" className="btn mx-2 rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark position-relative"><span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">{counter}</span></span> </NavLink>
+            {user?(
+              <button onClick={onLogout}>logout</button>
+            ):(<>
+            
+            </>)}
+          
           </div>
         </div>
       </div>

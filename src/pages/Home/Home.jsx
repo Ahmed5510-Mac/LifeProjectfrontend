@@ -1,6 +1,5 @@
 import Container from "@mui/material/Container";
 import Slider from "../../components/Slider/Slider";
-import Form from './../../components/Form/Form';
 
 import Draft from "../../components/Draft/draft";
 import SliderComponent from "../../components/offers/offers";
@@ -13,7 +12,6 @@ const Home = () => {
     <>
       <Slider />
         
-  
    <Container sx={{ marginY: 5 }}>
         <Draft
         imageSrc={"https://picsum.photos/1120/300"}
@@ -46,8 +44,6 @@ const Home = () => {
       <Container sx={{ marginY: 5 }}>
         <SeeAllOffers />
       </Container>
-
-      <Form/>
     </>
   );
 };

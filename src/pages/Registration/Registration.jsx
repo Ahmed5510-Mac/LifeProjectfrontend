@@ -40,7 +40,7 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-const paperStyle = { width: 310, margin: "auto", }
+const paperStyle = { width: 510, margin: "auto", }
 const Registration = () => {
   const [value, setValue] = React.useState(0);
 

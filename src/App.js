@@ -13,6 +13,7 @@ import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact.jsx';
 import Cart from './pages/Cart/Cart';
 import About from './pages/About/About';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -33,6 +34,7 @@ const App = () => {
        
           </Routes>
         </BrowserRouter>
+        <ToastContainer/>
         <Footer />
       </ThemeProvider>
     </>
