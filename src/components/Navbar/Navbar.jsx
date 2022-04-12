@@ -6,7 +6,6 @@ import units from "../../assets/units.png"
 import draugs from "../../assets/2.png"
 import News from "../../assets/4.png"
 import other from "../../assets/denta1.png"
-import mosh from "../../assets/6.png"
 import {NavLink, useNavigate} from "react-router-dom"
 import { useSelector,useDispatch } from 'react-redux'
 import { reset,logout } from '../../store/auth/authSlice'
@@ -65,8 +64,11 @@ export default function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link p-lg-3"  to="/about">About Us</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link p-lg-3"  to="/favourite">Favourite</NavLink>
+            </li>
             <li className="nav-item Categories position-relative">
-              <NavLink className="nav-link  p-lg-3" to="/ptoducts">Categories</NavLink>
+              <NavLink className="nav-link  p-lg-3" to="/products">Categories</NavLink>
                 {/*----------------------- megamenue ------------------- */}
               <div className="megMenue position-absolute">
                 {/*----- megamenue image ------ */}

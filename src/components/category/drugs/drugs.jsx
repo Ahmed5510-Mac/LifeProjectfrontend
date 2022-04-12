@@ -1,19 +1,20 @@
 import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import img1 from "../../assets/brufen.jpg";
-import styles from "./ProductCard.module.css";
+import img1 from "../../../assets/tool.jpg";
+import brufen from "../../../assets/brufen.jpg"
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../store/product/productSlice";
-import { CardActionArea } from "@mui/material";
+
+import { CardActionArea, Container } from "@mui/material";
 import { useNavigate } from "react-router";
+import { getProducts } from "../../../store/product/productSlice";
+import CategoryCard from "../../CategoryCard/CategoryCard";
 const theme = createTheme({
   components: {
     MuiTypography: {
@@ -40,7 +41,7 @@ const theme = createTheme({
   },
 });
 
-const ProductCard = () => {
+const Drugs = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { products } = useSelector((state) => state.products);
 
@@ -63,13 +64,21 @@ const ProductCard = () => {
 
   return (
     <>
+      <Container >
+        <Box mt={10}>
+        <CategoryCard image={img1} />
+        <Grid container  spacing={5}>
       {products &&
-        products.map((product, index) => (
-          <Grid item xs={3} columns={{ xs: 12, sm: 6, md: 4 }} key={index} className={styles.cardSadow} my={1}>
+      products.filter((product)=>{
+          return product.category.name==="Drugs"
+      })
+       .map((product, index) => {
+           return(
+          <Grid item xs={3} columns={{  xs: 12, sm: 6, md: 4 }} key={index} my={1}>
               <CardActionArea onClick={() => handleSelect(product._id)}>
                 <ThemeProvider theme={theme}>
-                  <Paper elvation={3} className={styles.show}>
-                    <img src={img1} alt="" className={styles.img} />
+                  <Paper elvation={3} >
+                    <img src={brufen} alt="" style={{width:"100%",height:"10rem"}} />
                     <Box paddingX={1} sx={{ borderRadius: 1 }}>
                       <Typography variant="h5" component="h1">
                         {product.productName}
@@ -102,12 +111,10 @@ const ProductCard = () => {
                           />
                       
                         </Box>
-                        <DeleteIcon />
                       </Box>
 
                       <Box sx={{ textAlign: "center" }}>
                         <Button
-                          className={styles.showButton}
                           variant="contained"
                           sx={{ mb: "10px" }}
                         >
@@ -119,8 +126,11 @@ const ProductCard = () => {
                 </ThemeProvider>
               </CardActionArea>
           </Grid>
-        ))}
+        )})}
+         </Grid>
+        </Box>
+      </Container>
     </>
   );
 };
-export default ProductCard;
+export default Drugs;

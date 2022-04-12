@@ -7,7 +7,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import Navbar from './components/Navbar/Navbar';
 import themeDark from './theme/DarkTheme/DarkTheme';
 import themeLight from './theme/LightTheme/LightTheme';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact.jsx';
@@ -16,6 +15,14 @@ import About from './pages/About/About';
 import { ToastContainer } from 'react-toastify';
 import Deatails2 from './pages/details/details';
 import SeeAllOffers from './pages/offers/offers';
+import Product from './pages/product/product';
+import ProductDetails from './pages/details/productDetails';
+import Favourite from './pages/favourite/favourite';
+import Tools from './components/category/tools/tools';
+import Units from './components/category/units/units';
+import Drugs from './components/category/drugs/drugs';
+import News from './components/category/news/news';
+import Other from './components/category/other/other';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -33,7 +40,14 @@ const App = () => {
             <Route path='/about' element={<About />} />
             <Route path='/details' element={<Deatails2/>} />
             <Route path='/offers' element={<SeeAllOffers/>} />
-            <Route path='/about' element={<About />} />
+            <Route path='/products' element={<Product />} />
+            <Route path='/tools' element={<Tools />} />
+            <Route path='/units' element={<Units />} />
+            <Route path='/drugs' element={<Drugs />} />
+            <Route path='/news' element={<News />} />
+            <Route path='/others' element={<Other />} />
+            <Route path='/product/:id' element={<ProductDetails />} />
+            <Route path='/favourite' element={<Favourite />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />
        
