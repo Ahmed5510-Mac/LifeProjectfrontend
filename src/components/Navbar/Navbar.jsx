@@ -1,7 +1,7 @@
 import React from 'react'
 import tools from "../../assets/tools1.png"
 import imgmenue from "../../assets/mega1.png"
-import logo from "../../assets/Logo.png"
+import logo from "../../assets/Logo1.png"
 import units from "../../assets/units.png"
 import draugs from "../../assets/2.png"
 import News from "../../assets/4.png"
@@ -19,6 +19,22 @@ export default function Navbar() {
  const dispatch= useDispatch()
  const {user} = useSelector((state)=>state.auth)
 
+//  const [className, setclassName] = useState('nav-transparent');
+
+
+ window.onscroll = function () {
+   let myNav = document.getElementById('navBar');
+   if (window.scrollY === 0) {
+      myNav.classList.remove('nav-color')
+      myNav.classList.remove('navbar-shrink')
+    } else {
+      myNav.classList.add('nav-color')
+      myNav.classList.add('navbar-shrink')
+    }
+ };
+
+
+
  const onLogout=()=>{
     dispatch(logout())
     dispatch(reset())
@@ -26,7 +42,7 @@ export default function Navbar() {
  }
 
   return (
-    <nav className="navbar sticky-top navbar-expand-lg ">
+    <nav className="navbar container-col-md fixed-top navbar-expand-lg" id="navBar">
       <div className="container-fluid">
         <NavLink className="Cnavbar-brand" to="/">
           <img className='w-50 d-sm-w-25'  src={logo} alt=""/>
@@ -50,7 +66,7 @@ export default function Navbar() {
               <NavLink className="nav-link p-lg-3"  to="/about">About Us</NavLink>
             </li>
             <li className="nav-item Categories position-relative">
-              <a className="nav-link  p-lg-3" href="/">Categories</a>
+              <NavLink className="nav-link  p-lg-3" to="/ptoducts">Categories</NavLink>
                 {/*----------------------- megamenue ------------------- */}
               <div className="megMenue position-absolute">
                 {/*----- megamenue image ------ */}
@@ -60,31 +76,27 @@ export default function Navbar() {
                 {/*----- megamenue links ------ */}
                 <div className="megaLinks">
                 <ul className="  mb-2 mb-lg-0">
-                  <li className="nav-item d-flex  align-items-center">
+                  <li className="nav-item d-flex   align-items-center">
                     <img  className="imageWidth" src={tools} alt="" />
-                    <a className="nav-link p-lg-3  active" aria-current="page" href="/">Tools</a>
+                    <NavLink className="nav-link p-lg-3  active" aria-current="page" to="/tools">Tools</NavLink>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={units} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">Units</a>
+                    <NavLink className="nav-link p-lg-3 active" aria-current="page" to="/units">Units</NavLink>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={draugs} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">Drugs</a>
+                    <NavLink className="nav-link p-lg-3 active" aria-current="page" to="/drugs">Drugs</NavLink>
                   </li>
                 </ul>
                 <ul>
                 <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={News} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">News</a>
+                    <NavLink className="nav-link p-lg-3 active" aria-current="page" to="/news">News</NavLink>
                   </li>
                   <li className="nav-item d-flex  align-items-center">
                   <img  className="imageWidth" src={other} alt="" />
-                    <a className="nav-link p-lg-3 active" aria-current="page" href="/">other</a>
-                  </li>
-                  <li className="nav-item d-flex  align-items-center">
-                  <img  className="imageWidth" src={mosh} alt="" />
-                    <a className="p-lg-3 active text" aria-current="page" href="/"> mosharffen </a>
+                    <NavLink className="nav-link p-lg-3 active" aria-current="page" to="/others">other</NavLink>
                   </li>
                 </ul>
                 </div>
@@ -103,7 +115,7 @@ export default function Navbar() {
            <NavLink to="/register" className="btn   rounded-circle bg-white"> <span  className="fa-solid fa-user text-dark"></span> </NavLink>
             <NavLink to="/cart" className="btn mx-2 rounded-circle bg-white"> <span className="fa-solid fa-cart-shopping text-dark position-relative"><span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">{counter}</span></span> </NavLink>
             {user?(
-              <button onClick={onLogout}>logout</button>
+              <button className='btn' onClick={onLogout}><i className="fa-solid fa-arrow-right-from-bracket"></i></button>
             ):(<>
             
             </>)}

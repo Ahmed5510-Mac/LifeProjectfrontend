@@ -40,21 +40,30 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-const paperStyle = { width: 510, margin: "auto", }
+const paperStyle = { 
+  width: "60vw", 
+  margin: "auto",
+  backgroundColor:"#ffffffb3",
+  borderRadius: "10px 10px",
+  marginTop: "150px",
+  boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)"
+   }
+  
 const Registration = () => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  return (<>
-    <div className={styles.paper}>
-      <Paper elvation={20} style={paperStyle}>
-        <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+  return (
+  <>
+    <div className={styles.paper} >
+      <Paper elvation={20}  style={paperStyle} >
+        <Box>
+          <Box  sx={{display:"flex",justifyContent:"center",marginBottom:"20px" }} >
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="SignIn" {...a11yProps(0)} />
-              <Tab label="SignOUT" {...a11yProps(1)} />
+              <Tab label="SignIn" sx={{ color: '#212529' }} {...a11yProps(0)} />
+              <Tab label="SignOUT" sx={{ color: '#212529' }} {...a11yProps(1)} />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
@@ -65,7 +74,9 @@ const Registration = () => {
           </TabPanel>
         </Box>
       </Paper>
+    <div className='toolheight'></div>
     </div>
+
   </>);
 }
 

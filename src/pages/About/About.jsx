@@ -1,27 +1,25 @@
-import img3 from "../../assets/img3.jpg";
-import img4 from "../../assets/img4.jpg";
+import img3 from "../../assets/teamwork.jpg";
+import img4 from "../../assets/contar.jpg";
 import img5 from "../../assets/img5.jpg";
 import img6 from "../../assets/img6.jpg";
 import img7 from "../../assets/img7.jpg";
+import img8 from "../../assets/comp.jpg";
 import img1 from "../../assets/img1.jpg";
 import Card from "../../components/Card/Card";
 
 const About = () => {
   return (
     <>
-      <div className="container">
-
-
-        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleControls"  style={{"height":"90vh"}} className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
-    <div className="carousel-item active">
+    <div className="carousel-item active "  style={{"height":"90vh"}}>
       <img src={img3} className="d-block w-100" alt="..."/>
     </div>
-    <div className="carousel-item">
+    <div className="carousel-item"  style={{"height":"90vh"}}>
       <img src={img4} className="d-block w-100" alt="..."/>
     </div>
-    <div className="carousel-item">
-      <img src={img3} className="d-block w-100" alt="..."/>
+    <div className="carousel-item"  style={{"height":"90vh"}}>
+      <img src={img8} className="d-block w-100" alt="..."/>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -38,9 +36,9 @@ const About = () => {
 
 
 
-          <div>
-        <h1>Who We Are</h1>
-        <p>
+          <div className="row justify-content-center">
+        <h1 className="text-center my-5 col-3 border-bottom border-dark border-2 py-1 px-sm-1">Who We Are</h1><br/>
+        <p className="text-center">
           development and production of dental curing light, dental chair
           control system, dental burs, dental led lamp, dental endo products and
           so on of the company. The company has rich experience
@@ -50,8 +48,8 @@ const About = () => {
           uphold our mission: Always working for better quality and better life!
         </p>
         </div>
-        <div>
-          <h2>our team</h2>
+        <div className="row justify-content-center ">
+          <h2 className="text-center my-5 col-3  border-bottom border-dark border-2 py-1 px-sm-1">our team</h2>
 
           <div className="row">
             <div className="col-md-6 col-sm-12">
@@ -90,7 +88,6 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

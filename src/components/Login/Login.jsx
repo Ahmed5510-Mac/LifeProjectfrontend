@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, reset } from './../../store/auth/authSlice';
 import Spinner from '../Spinner/Spinner';
+import "./login.css"
 
 const Login = ({ handleChange }) => {
     const navigate = useNavigate()
@@ -58,19 +59,21 @@ const Login = ({ handleChange }) => {
     const { email,password} = formData
 
     return (<>
-        <form onSubmit={handleSubmit}>
-
-            <div>
-                <label htmlFor="">customerEmail</label>
-                <input type="email" name='email' value={email} onChange={onChange} />
+        <form  className='continer p-5 mt-3 sign-in text-center' onSubmit={handleSubmit}>
+            <div className='d-flex align-items-center justify-content-center w-100 '>
+            <label htmlFor="userName"><i className="fa-solid border p-2 rounded-circle fa-user"></i></label>
+                <input placeholder='userName' className='form-control w-100 ms-2' type="email" name='email' value={email} onChange={onChange} />
             </div>
-            <div>
-                <label htmlFor="">customerPassword</label>
-                <input type="text" name='password' value={password} onChange={onChange} />
+            <div className='d-flex justify-content-center align-items-center w-100 mt-2' >
+            <label htmlFor="Passoword"><i className="fa-solid fa-unlock-keyhole border p-2 rounded-circle"></i></label>
+                <input placeholder='Passoword' className='form-control  ms-2' type="text" name='password' value={password} onChange={onChange} />
             </div>
 
-            <button type="submit">submit</button>
+            <button className='btn btn-lg text-white my-3' type="submit">Lgoin <i class="fa-solid fa-right-to-bracket"></i></button><br/>
+            <a href='#' className="password">Forgot your password ?</a>
         </form>
+
+
     </>);
 }
 
