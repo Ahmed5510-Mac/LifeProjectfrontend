@@ -74,7 +74,7 @@ const Tools = () => {
       })
        .map((product, index) => {
            return(
-          <Grid item xs={3} columns={{  xs: 12, sm: 6, md: 4 }} key={index} my={1}>
+          <Grid item lg={3} md={4}sm={6} xs={12} key={index} my={1}>
               <CardActionArea onClick={() => handleSelect(product._id)}>
                 <ThemeProvider theme={theme}>
                   <Paper elvation={3} >

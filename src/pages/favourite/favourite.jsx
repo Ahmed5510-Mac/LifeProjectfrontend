@@ -19,11 +19,11 @@ const Favourite = () => {
           </Box>
        
       ) : (
-        <Box sx={{ flexGrow: 1 }} my={3}>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 6, sm: 6, md: 12 }} >
+        <Box sx={{ flexGrow: 1 }} my={3} mt={9}>
+        <Grid container spacing={{ xs: 2, md: 3 }} xs={12}>
         {favourite.map((item, i) => {
           return (
-            <Grid item xs={2} sm={4} md={4} key={item._id}>
+            <Grid item  md={4} sm={6} xs={12} key={item._id} lg={3}  >
             <Paper elevation={3}  >
                 <CardMedia
                   component="img"
