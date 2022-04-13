@@ -21,8 +21,10 @@ export default function OffersContainer({
         justifyContent="space-between"
         alignItems="center"
         paddingX={2}
+
+        xs={12} md={12} sm={6}
       >
-        <Grid item >
+        <Grid  item >
           <div
             style={{  
               textAlign: "left",
@@ -33,10 +35,10 @@ export default function OffersContainer({
             Flash Sales
           </div>
         </Grid>
-        <Grid item>
+        <Grid  item>
           <div
             style={{
-              textAlign: "center",
+              textAlign: "right",
               fontWeight: "bold",
               fontSize: "25px",
               color: textColor,

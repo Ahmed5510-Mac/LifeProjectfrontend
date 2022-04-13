@@ -6,12 +6,10 @@ import img7 from "../../assets/img7.jpg";
 import img8 from "../../assets/comp.jpg";
 import img1 from "../../assets/img1.jpg";
 import Card from "../../components/Card/Card";
-import { Container } from "@mui/material";
 
 const About = () => {
   return (
     <>
-   
         <div id="carouselExampleControls"  style={{"height":"90vh"}} className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
     <div className="carousel-item active "  style={{"height":"90vh"}}>
@@ -36,10 +34,10 @@ const About = () => {
 
 
 
-<Container>
 
-          <div className="row justify-content-center mt-0 pt-0">
-        <h1 className="text-center col-3 border-bottom border-dark border-2 my-2 px-sm-1">Who We Are</h1><br/>
+
+          <div className="row justify-content-center">
+        <h1 className="text-center my-5 col-3 border-bottom border-dark border-2 py-1 px-sm-1">Who We Are</h1><br/>
         <p className="text-center">
           development and production of dental curing light, dental chair
           control system, dental burs, dental led lamp, dental endo products and
@@ -51,7 +49,7 @@ const About = () => {
         </p>
         </div>
         <div className="row justify-content-center ">
-          <h2 className="text-center col-3  border-bottom border-dark border-2 my-3 px-sm-1">our team</h2>
+          <h2 className="text-center my-5 col-3  border-bottom border-dark border-2 py-1 px-sm-1">our team</h2>
 
           <div className="row">
             <div className="col-md-6 col-sm-12">
@@ -90,7 +88,6 @@ const About = () => {
             </div>
           </div>
         </div>
-        </Container>
     </>
   );
 };

@@ -25,16 +25,16 @@ const dispatch = useDispatch();
   return (
       <>
       <Container >
-      <Box  key={location.state.info._id} my={3} mt={9}>
-      <Grid container spacing={2} xs={12}>
-        <Grid item  sm={8} xs={12}>
+      <Box sx={{ flexGrow: 1 }} key={location.state.info._id} my={3} mt={9}>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
           <Item>
             <Grid container spacing={2}>
 
-              <Grid item md={6} xs={12}>
+              <Grid item md={6} sm={12}>
                 <ImageGallaryComponent />
               </Grid>
-              <Grid item  md={6} xs={12} >
+              <Grid item  md={6} sm={12} >
                 <Grid container spacing={5}>
                   <Grid item xs={10}>
                     <Typography sx={{ fontSize: 20 }} color="text.primary">
@@ -91,7 +91,7 @@ const dispatch = useDispatch();
           </Item>
         </Grid>
 
-        <Grid item sm={4} xs={12}>
+        <Grid item xs={4}>
           <Delivery />
         </Grid>
       

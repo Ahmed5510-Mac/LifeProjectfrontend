@@ -1,55 +1,79 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import SkillsProgress from './offersCardProgress';
-import tooth from "../../assets/tooth.jpg";
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import SkillsProgress from "./offersCardProgress";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectProduct } from "../../store/offers/offersSlice";
 
+export default function OffersCard({
+  image,
+  productName,
+  maxNumOfProducts,
+  numOfProductsThatReduced,
+  priceBefore,
+  discountPersentatge,
+  productId
+}) {
+  let priceAfter = (priceBefore * discountPersentatge) / 100;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-export default function OffersCard({productName,maxNumOfProducts,numOfProductsThatReduced,priceBefore,discountPersentatge}) {
- let priceAfter=(priceBefore*discountPersentatge)/100
- const navigate= useNavigate()
+  const onClick = () => {
+    dispatch(selectProduct(productId));
+    navigate("/details");
+  };
 
- const onClick=()=>{
-  navigate('/details')
-}
-
-    return (
-    <Card sx={{ maxWidth: 300 ,maxHeight:330 ,marginLeft:"2%"}}>
+  return (
+    <Card sx={{ maxWidth: 300, maxHeight: 330, marginLeft: "2%" }}>
       <CardActionArea onClick={onClick}>
         <CardMedia
           sx={{
             display: "block",
-            marginTop:"1%",
+            marginTop: "1%",
             marginLeft: "auto",
             marginRight: "auto",
-            width: "50%"
-        }}
+            width: "50%",
+          }}
           component="img"
           height="120"
-          image={tooth}
+          image={image}
           alt="green iguana"
         />
         <CardContent>
-          <Typography sx={{marginBottom:"0%"}}  gutterBottom variant="h8" component="div">
-           {productName}
+          <Typography
+            sx={{ marginBottom: "0%" }}
+            gutterBottom
+            variant="h8"
+            component="div"
+          >
+            {productName}
           </Typography>
-          <Typography sx={{fontWeight:"bold" , marginBottom:"0"}} gutterBottom variant="h5" component="div">
-           {`EGP ${priceAfter}`}
+          <Typography
+            sx={{ fontWeight: "bold", marginBottom: "0" }}
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
+            {`EGP ${priceAfter}`}
           </Typography>
-          <Typography sx={{textDecoration: "line-through"}} gutterBottom variant="h8" component="div">
-           {`EGP ${priceBefore}`}
+          <Typography
+            sx={{ textDecoration: "line-through" }}
+            gutterBottom
+            variant="h8"
+            component="div"
+          >
+            {`EGP ${priceBefore}`}
           </Typography>
-          <SkillsProgress 
-          maxNumOfProducts={maxNumOfProducts}
-          numOfProductsThatReduced={numOfProductsThatReduced}
+          <SkillsProgress
+            maxNumOfProducts={maxNumOfProducts}
+            numOfProductsThatReduced={numOfProductsThatReduced}
           />
         </CardContent>
       </CardActionArea>
     </Card>
   );
 }
-

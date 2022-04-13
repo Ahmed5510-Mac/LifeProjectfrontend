@@ -3,12 +3,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, CardActionArea, Rating } from "@mui/material";
+import { Box, CardActionArea, CardActions, Rating } from "@mui/material";
 import SkillsProgress from "../offers/offersCardProgress";
 import tooth from "../../assets/tooth.jpg";
 import CartButtons from "../Deatails/detailsCartButton";
 import Deatails2 from "../../pages/details/details";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectProduct } from "../../store/offers/offersSlice";
 
 export default function OfferCard({
   productName,
@@ -16,13 +18,17 @@ export default function OfferCard({
   numOfProductsThatReduced,
   priceBefore,
   discountPersentatge,
-  ratingValue
+  ratingValue,
+  image,
+  productId
 }) {
   
   let priceAfter = (priceBefore * discountPersentatge) / 100;
   const navigate= useNavigate()
+  const dispatch=useDispatch()
 
   const onClick=()=>{
+   dispatch(selectProduct(productId))
    navigate('/details')
  }
   return (
@@ -38,7 +44,7 @@ export default function OfferCard({
           }}
           component="img"
           height="120"
-          image={tooth}
+          image={image}
           alt="green iguana"
         />
         <CardContent>
@@ -71,25 +77,26 @@ export default function OfferCard({
             <Rating
               sx={{ paddingTop: "3%" }}
               name="read-only"
-              value={ratingValue}
+              value={ratingValue =='undefined' || ratingValue == null ?0:ratingValue}
               readOnly
               size="small"
             />
             <Typography variant="body2" component="p" marginLeft={1}>
-              <a style={{color:"blue"}}>{`(${ratingValue})`}</a>
+              <a style={{color:"blue"}}>{`(${ratingValue =='undefined' || ratingValue == null ?0:ratingValue})`}</a>
             </Typography>
           </Box>
-
 
           <SkillsProgress
             maxNumOfProducts={maxNumOfProducts}
             numOfProductsThatReduced={numOfProductsThatReduced}
           />
-          
-          <CartButtons/>
-          
         </CardContent>
       </CardActionArea>
+      <CardActions style={{justifyContent: 'center'}} >
+      <CartButtons />
+      </CardActions>
+      
+      
     </Card>
   );
 }

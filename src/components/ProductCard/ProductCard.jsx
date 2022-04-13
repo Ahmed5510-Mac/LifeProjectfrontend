@@ -5,6 +5,7 @@ import img1 from "../../assets/brufen.jpg";
 import styles from "./ProductCard.module.css";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -64,7 +65,7 @@ const ProductCard = () => {
     <>
       {products &&
         products.map((product, index) => (
-          <Grid item lg={3} md={4}sm={6} xs={6} key={index} className={styles.cardSadow} my={1}>
+          <Grid item xs={3} columns={{ xs: 12, sm: 6, md: 4 }} key={index} className={styles.cardSadow} my={1}>
               <CardActionArea onClick={() => handleSelect(product._id)}>
                 <ThemeProvider theme={theme}>
                   <Paper elvation={3} className={styles.show}>
@@ -101,6 +102,7 @@ const ProductCard = () => {
                           />
                       
                         </Box>
+                        <DeleteIcon />
                       </Box>
 
                       <Box sx={{ textAlign: "center" }}>
