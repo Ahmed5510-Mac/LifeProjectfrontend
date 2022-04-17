@@ -6,11 +6,12 @@ import Grid from "@mui/material/Grid";
 import Delivery from "../../components/delivery/delivery";
 import ImageGallaryComponent from "../../components/Deatails/detailsScrollerCarasol";
 import { CardActions, Container, Rating, Typography } from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import DiscountCard from "../../components/Deatails/detailsDiscountCard";
 import CartButtons from "../../components/Deatails/detailsCartButton";
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addFavourite } from "../../store/auth/authSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,11 +22,59 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Deatails2() {
   const { selectedOfferProduct } = useSelector((state) => state.discounts);
-  const [value, setValue] = React.useState(2);
+
+  const [isActive, setIsActive] = React.useState(false);
+  const user = useSelector((state) => state.auth.user);
+  const myfavourites = useSelector((state) => state.auth.myfavourites);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (user &&myfavourites.length != 0 ) {
+      if (
+        myfavourites[0].favouriteProducts.find(
+          (item) => item._id === selectedOfferProduct._id
+        )
+      ) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    }else if(user && myfavourites.length === 0){
+      setIsActive(true);
+      //add to favorite Array
+      dispatch(addFavourite({ selectedOfferProduct, ownerId: user.customer._id }));
+    }else {
+      setIsActive(false);
+    }
+  },[dispatch,navigate,myfavourites]);
+
+  const handleSelect = () => {
+    if (user &&myfavourites.length != 0 ) {
+      if (
+        myfavourites[0].favouriteProducts.find(
+          (item) => item._id === selectedOfferProduct._id
+        )
+      ) {
+        setIsActive(false);
+        // delete from favorite Array'
+      } else {
+        setIsActive(true);
+        //add to favorite Array
+        dispatch(addFavourite({ selectedOfferProduct, ownerId: user.customer._id }));
+      }
+    }else if(user && myfavourites.length === 0){
+      setIsActive(true);
+      //add to favorite Array
+      dispatch(addFavourite({ selectedOfferProduct, ownerId: user.customer._id }));
+    }else {
+      navigate("/register");
+    }
+  };
+
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    console.log(selectedOfferProduct);
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -36,26 +85,44 @@ export default function Deatails2() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={8} sm={12}>
               <Item>
-                <Grid container >
+                <Grid container>
                   <Grid item xs={12} md={6} sm={12}>
-                    <div style={{maxWidth:"80%"}}>
-                    <ImageGallaryComponent 
-                    title={selectedOfferProduct.productName}
-                    image={selectedOfferProduct.image}/>
+                    <div style={{ maxWidth: "80%" }}>
+                      <ImageGallaryComponent
+                        title={selectedOfferProduct.productName}
+                        image={selectedOfferProduct.image}
+                      />
                     </div>
                   </Grid>
                   <Grid item xs={12} md={6} sm={12}>
                     <Grid container item spacing={3}>
                       <Grid item xs={10}>
-                        <Typography sx={{ fontSize: 20 }} color="text.primary">
+                        <Typography
+                          sx={{
+                            fontSize: 20,
+                            fontWeight: "bold",
+                            fontFamily: "tahoma",
+                          }}
+                          color="text.primary"
+                        >
                           {selectedOfferProduct.productName}
+                        </Typography>
+                        <Typography sx={{ fontSize: 20 }} color="text.primary">
+                          {selectedOfferProduct.description}
                         </Typography>
                       </Grid>
                       <Grid item xs={2}>
-                        <FavoriteBorderOutlinedIcon sx={{ color: "#d90429" }} />
+                        <i
+                          className="fa fa-solid fa-heart"
+                          style={{
+                            fontSize: "25px",
+                            cursor: "pointer",
+                            color: `${isActive ? "red" : "#ccc"}`,
+                          }}
+                          onClick={handleSelect}
+                        ></i>
                       </Grid>
                     </Grid>
-
                     <Box sx={{ display: "center", alignItems: "center" }}>
                       <Rating
                         sx={{ paddingTop: "3%" }}
@@ -78,13 +145,14 @@ export default function Deatails2() {
                         } verified ratings)`}</a>
                       </Typography>
                     </Box>
-
                     <DiscountCard
                       productName={selectedOfferProduct.productName}
                       maxNumOfProducts={selectedOfferProduct.quantity}
                       numOfProductsThatReduced={3}
                       priceBefore={selectedOfferProduct.price}
-                      discountPersentatge={selectedOfferProduct.discount.discountAmount}
+                      discountPersentatge={
+                        selectedOfferProduct.discount.discountAmount
+                      }
                     />
                     <CardActions style={{ justifyContent: "center" }}>
                       <CartButtons />
@@ -93,7 +161,6 @@ export default function Deatails2() {
                 </Grid>
               </Item>
             </Grid>
-
             <Grid item xs={12} md={4} sm={12}>
               <Delivery />
             </Grid>

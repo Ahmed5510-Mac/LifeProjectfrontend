@@ -46,6 +46,7 @@ export default function SeeAllOffers() {
             image={item.image}
             discountPersentatge={item.discount.discountAmount}
             ratingValue={item.rating}
+            description={item.description}
           />
         </Grid>
       );

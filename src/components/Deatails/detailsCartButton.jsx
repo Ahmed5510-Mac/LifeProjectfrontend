@@ -5,7 +5,7 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 export default function CartButtons() {
   return (
     
-      <Button  sx={{color:"white",fontWeight:"bold",width:"100%",marginTop:"10%",bgcolor: 'warning.main'}} variant="contained" disableElevation startIcon={<AddShoppingCartOutlinedIcon />}>
+      <Button  sx={{color:"white",fontWeight:"bold",width:"100%",marginTop:"3%",bgcolor: 'warning.main'}} variant="contained" disableElevation startIcon={<AddShoppingCartOutlinedIcon />}>
         Add To Cart 
       </Button>
   );

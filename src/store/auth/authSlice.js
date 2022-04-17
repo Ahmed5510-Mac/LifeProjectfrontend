@@ -1,12 +1,76 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+/////////////////// favourite ////////////////////////
+export const addFavourite = createAsyncThunk(
+  "customer/addFavourite",
+  async (customertData, thunkAPI) => {
+    console.log(customertData.selectedOfferProduct);
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/favourite/${customertData.ownerId}`,
+        customertData
+      );
+      const data = await res.json();
+      console.log(data);
+      if (data) {
+        localStorage.setItem("localFavourite", JSON.stringify(data));
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getFavourite = createAsyncThunk(
+  "customer/addFavourite",
+  async (customertData, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/favourite/${customertData}`
+      );
+      console.log("this from getFavourite", res.data);
+      if (res.data) {
+        localStorage.setItem("localFavourite", JSON.stringify(res.data));
+      }
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteFavourite = createAsyncThunk(
+  "auth/deleteFavourite",
+  async (customertData, thunkAPI) => {
+    console.log(customertData);
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await axios.delete(
+        `http://localhost:8080/favourite/${customertData.ownerId+"&"+customertData.productId}`
+      );
+      console.log("this from getFavourite", res);
+      if (res.data) {
+        localStorage.setItem("localFavourite", JSON.stringify(res.data));
+      }
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+///////////////////////////////////////////////////////////
 
 export const getUsers = createAsyncThunk(
-  'auth/getUsers',
+  "auth/getUsers",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.get('http://localhost:8080/customer');
+      const res = await axios.get("http://localhost:8080/customer");
       return res.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -16,11 +80,13 @@ export const getUsers = createAsyncThunk(
 
 //Logout
 export const logout = createAsyncThunk(
-  'auth/logout',
+  "auth/logout",
   async (userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
+      // localStorage.removeItem('cart');
+      localStorage.removeItem("localFavourite");
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -29,13 +95,13 @@ export const logout = createAsyncThunk(
 
 //Register
 export const register = createAsyncThunk(
-  'auth/register',
+  "auth/register",
   async (userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.post('http://localhost:8080/customer', userData);
+      const res = await axios.post("http://localhost:8080/customer", userData);
       if (res.data) {
-        localStorage.setItem('user', JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data));
       }
       return res.data;
     } catch (error) {
@@ -46,44 +112,97 @@ export const register = createAsyncThunk(
 
 //Login
 export const login = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async (userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.post('http://localhost:8080/login', userData);
+      const res = await axios.post("http://localhost:8080/login", userData, {
+        headers: {
+          "Content-type": "application/json;charset=UTF-8",
+        },
+      });
       if (res.data) {
-        localStorage.setItem('user', JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data));
       }
       return res.data;
     } catch (error) {
-      return rejectWithValue(/*error.message,*/"ay 7aga");
+      return rejectWithValue(error.message);
     }
   }
 );
 
 //get user from local storage
-const user = JSON.parse(localStorage.getItem('user'));
+let user = JSON.parse(localStorage.getItem("user"));
+let fav = JSON.parse(localStorage.getItem("localFavourite"));
 
 const initialState = {
-  user: user ? user : null,
+  user: user ? user :null,
   isError: null,
   isSuccess: false,
   isLoading: false,
-  message: '',
+  message: "",
+  myfavourites: fav ? fav : [],
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     reset: (state) => {
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
-      state.message = '';
+      state.message = "";
     },
   },
   extraReducers: {
+    //add product to favorite
+    [addFavourite.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = null;
+    },
+    [addFavourite.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.isLoading = false;
+      state.myfavourites = action.payload;
+    },
+    [addFavourite.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = action.payload;
+    },
+
+    //getfavorite
+    [getFavourite.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = null;
+    },
+    [getFavourite.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.isLoading = false;
+      state.myfavourites = action.payload;
+    },
+    [getFavourite.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = action.payload;
+    },
+
+    //delete favorite
+    [deleteFavourite.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = null;
+    },
+    [deleteFavourite.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.isLoading = false;
+      state.myfavourites = action.payload;
+    },
+    [deleteFavourite.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = action.payload;
+    },
+
+
+
     //register
     [register.pending]: (state, action) => {
       console.log(action);
@@ -106,6 +225,7 @@ export const authSlice = createSlice({
     [logout.fulfilled]: (state, action) => {
       console.log(action);
       state.user = null;
+      state.myfavourites = [];
     },
     //login
     [login.pending]: (state, action) => {
@@ -114,7 +234,6 @@ export const authSlice = createSlice({
       state.isError = null;
     },
     [login.fulfilled]: (state, action) => {
-      console.log(action);
       state.isLoading = false;
       state.isSuccess = true;
       state.user = action.payload;

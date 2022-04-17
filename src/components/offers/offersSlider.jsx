@@ -92,6 +92,7 @@ const SliderComponent = ({ colorStyle, textColor, discountId }) => {
               image={item.image}
               discountPersentatge={item.discount.discountAmount}
               productId={item._id}
+              description={item.description}
             />
           </div>
         );

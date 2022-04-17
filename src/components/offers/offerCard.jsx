@@ -3,12 +3,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, CardActions } from "@mui/material";
 import SkillsProgress from "./offersCardProgress";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { selectProduct } from "../../store/offers/offersSlice";
-
+import styles from '../Draft/draft.module.css'
 export default function OffersCard({
   image,
   productName,
@@ -16,7 +16,8 @@ export default function OffersCard({
   numOfProductsThatReduced,
   priceBefore,
   discountPersentatge,
-  productId
+  productId,
+  description
 }) {
   let priceAfter = (priceBefore * discountPersentatge) / 100;
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ export default function OffersCard({
   };
 
   return (
-    <Card sx={{ maxWidth: 300, maxHeight: 330, marginLeft: "2%" }}>
+    <Card  className={styles.draft} sx={{ maxWidth: 300, maxHeight: 330, marginLeft: "2%" }}>
       <CardActionArea onClick={onClick}>
-        <CardMedia
+        <CardMedia 
           sx={{
             display: "block",
             marginTop: "1%",
@@ -45,12 +46,20 @@ export default function OffersCard({
         />
         <CardContent>
           <Typography
-            sx={{ marginBottom: "0%" }}
+            sx={{ marginBottom: "0%",fontWeight: "bold" }}
             gutterBottom
             variant="h8"
             component="div"
           >
             {productName}
+          </Typography>
+          <Typography
+            sx={{ marginBottom: "0%" }}
+            gutterBottom
+            variant="h8"
+            component="div"
+          >
+            {description}
           </Typography>
           <Typography
             sx={{ fontWeight: "bold", marginBottom: "0" }}

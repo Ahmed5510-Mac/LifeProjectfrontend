@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/product/productSlice";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router";
+import OfferCard from "../offersCard/offersCard";
 const theme = createTheme({
   components: {
     MuiTypography: {
@@ -61,66 +62,36 @@ const ProductCard = () => {
     });
   };
 
-  return (
-    <>
-      {products &&
-        products.map((product, index) => (
-          <Grid item xs={3} columns={{ xs: 12, sm: 6, md: 4 }} key={index} className={styles.cardSadow} my={1}>
-              <CardActionArea onClick={() => handleSelect(product._id)}>
-                <ThemeProvider theme={theme}>
-                  <Paper elvation={3} className={styles.show}>
-                    <img src={img1} alt="" className={styles.img} />
-                    <Box paddingX={1} sx={{ borderRadius: 1 }}>
-                      <Typography variant="h5" component="h1">
-                        {product.productName}
-                      </Typography>
-                      <Typography variant="subtitle1" component="p">
-                        {product.description}
-                      </Typography>
-                      <Box>
-                        <Typography variant="body3" component="p">
-                          EGP:{product.price}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Box
-                          sx={{ display: "center", alignItems: "center" }}
-                          marginTop={1}
-                        >
-                          <Rating
-                            name="simple-controlled"
-                            value={value}
-                            onChange={(event, newValue) => {
-                              setValue(newValue);
-                            }}
-                            size="small"
-                          />
-                      
-                        </Box>
-                        <DeleteIcon />
-                      </Box>
 
-                      <Box sx={{ textAlign: "center" }}>
-                        <Button
-                          className={styles.showButton}
-                          variant="contained"
-                          sx={{ mb: "10px" }}
-                        >
-                          Add To Cart
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Paper>
-                </ThemeProvider>
-              </CardActionArea>
-          </Grid>
-        ))}
-    </>
+  const categoryCard =
+  products &&
+  products.map((item, index) => {
+    return (
+      <Grid key={index} item xs={6} md={3} sm={6}>
+          <OfferCard
+            productId={item._id}
+            productName={item.productName}
+            maxNumOfProducts={item.quantity}
+            numOfProductsThatReduced={2}
+            priceBefore={item.price}
+            image={item.image}
+            discountPersentatge={item.discount.discountAmount}
+            ratingValue={item.rating}
+            description={item.description}
+          />
+      </Grid>
+    );
+  });
+  return (
+    <Box sx={{ flexGrow: 1 }} my={"6%"}>
+    <Grid
+      container
+      spacing={{ xs: 2, md: 3 }}
+      columns={{ xs: 6, sm: 6, md: 12 }}
+    >
+      {categoryCard}
+    </Grid>
+  </Box>
   );
 };
 export default ProductCard;

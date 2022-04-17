@@ -65,7 +65,6 @@ reducers:{
 setDiscountId:function(state,{payload}){
 state.oneDiscount=payload
 },
-
 },
 
   extraReducers: {

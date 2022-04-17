@@ -23,6 +23,7 @@ import Units from './components/category/units/units';
 import Drugs from './components/category/drugs/drugs';
 import News from './components/category/news/news';
 import Other from './components/category/other/other';
+import SearchResult from './pages/SearchResult/searchResult';
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -41,6 +42,7 @@ const App = () => {
             <Route path='/details' element={<Deatails2/>} />
             <Route path='/offers' element={<SeeAllOffers/>} />
             <Route path='/products' element={<Product />} />
+            <Route path='/searchResult' element={<SearchResult/>}/>
             <Route path='/tools' element={<Tools />} />
             <Route path='/units' element={<Units />} />
             <Route path='/drugs' element={<Drugs />} />

@@ -1,67 +1,95 @@
-import { Button, Container, Alert, Box, Paper, Grid } from "@mui/material";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+import { Container, Alert, Box, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import img1 from "../../assets/brufen.jpg";
-import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { removeItem } from "../../store/favourite/favouriteSlice";
+import OfferCard from "../../components/offersCard/offersCard";
+import { useEffect } from "react";
+import { deleteFavourite, getFavourite } from "../../store/auth/authSlice";
+import { useLocation } from "react-router-dom";
 const Favourite = () => {
-  const favourite = useSelector((state) => state.favourite.favourite);
+  const myfavourites = useSelector((state) => state.auth.myfavourites);
+  const user =useSelector((state)=>state.auth.user)
   const dispatch = useDispatch();
+let favoriteCard=''
+
+console.log(user);
+
+useEffect(()=>{
+  if(user){
+dispatch(getFavourite( user.customer._id)) 
+  }
+},[]);
+
+
+  if(user&&myfavourites.length != 0){
+     favoriteCard =
+    myfavourites[0].favouriteProducts &&
+    myfavourites[0].favouriteProducts.map((item, index) => {
+        return (
+          <Grid key={index} item xs={6} md={3} sm={6}>
+            <Box sx={{ position: "relative" }}>
+              <OfferCard
+                productId={item._id}
+                productName={item.productName}
+                maxNumOfProducts={item.quantity}
+                numOfProductsThatReduced={2}
+                priceBefore={item.price}
+                image={item.image}
+                discountPersentatge={item.discount.discountAmount}
+                ratingValue={item.rating}
+                description={item.description}
+              />
+              <DeleteIcon
+                sx={{
+                  m: 1,
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  fontSize: "35px",
+                  color: "#ff5722",
+                }}
+                onClick={() => dispatch(deleteFavourite({productId:item._id,ownerId:user.customer._id}))}
+                cursor="pointer"
+              />
+            </Box>
+          </Grid>
+        );
+      });
+  
+  }
+  
   return (
     <>
-     <Container>
-      {favourite <= 0 ? (
-          <Box height="400px" style={{ display: 'flex',justifyContent: "center",alignItems: "center"}}>
-          <Alert variant="filled" severity="info" style={{ width:"1000px",justifyContent: "center"}} >You don't have any favourites</Alert>
+      <Container sx={{ marginY: "5%" }}>
+        {myfavourites.length <= 0 ? (
+          <Box
+            height="400px"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Alert
+              variant="filled"
+              severity="info"
+              style={{ width: "1000px", justifyContent: "center" }}
+            >
+              You don't have any favourites
+            </Alert>
+          </Box>  
+        ) : (
+          <Box sx={{ flexGrow: 1 }} my={3}>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 6, sm: 6, md: 12 }}
+            >
+              {favoriteCard}
+            </Grid>
           </Box>
-       
-      ) : (
-        <Box sx={{ flexGrow: 1 }} my={3}>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 6, sm: 6, md: 12 }} >
-        {favourite.map((item, i) => {
-          return (
-            <Grid item xs={2} sm={4} md={4} key={item._id}>
-            <Paper elevation={3}  >
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={img1}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {item.productName}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {item.description}
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{display:"flex", justifyContent: "space-between",textAlign: "center" }}>
-                  <Button variant="contained" sx={{m:1}}>
-                    add to cart
-                  </Button>
-                  <CloseIcon sx={{m:1}}
-                    onClick={() => dispatch(removeItem(item._id))}
-                    cursor="pointer"
-                  />
-                </CardActions>
-             
-          
-            </Paper>
-         </Grid>
-              
-          );
-          
-        })
-      }
-      </Grid>
-      </Box>
-      )}
-       
-       </Container>
+        )}
+      </Container>
     </>
   );
 };

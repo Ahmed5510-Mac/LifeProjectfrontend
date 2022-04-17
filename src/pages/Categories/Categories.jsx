@@ -1,6 +1,5 @@
 const Categories = () => {
     return ( <>categories</> );
-
     
 }
  

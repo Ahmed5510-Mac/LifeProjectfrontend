@@ -2,14 +2,21 @@ import product from "../../assets/2.png";
 import "./cart.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { increment ,decrement} from "../../store/cart/cartSlice";
+import { Container } from "@mui/material";
 
 const Cart = () => {
-    const counter =  useSelector((data)=>data.cart.counterValue)
+    const counter =  useSelector((data)=>data.cart.counterValue);
+   const myCart = useSelector((state) => state.auth.myCart);
+
+   console.log(myCart);
+
+
     const dispatch = useDispatch()
+
     return (
-        <>
+        <Container sx={{marginY:"5%"}}>
             <div className="alert alert-danger w-100 d-none " role="alert">
-                Invalid added
+                Invalid added   
             </div>
 
             <div className="container-md mob-cart-Container mt-5  ">
@@ -59,7 +66,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </Container>
     );
 }
 
