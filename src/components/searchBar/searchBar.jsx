@@ -44,17 +44,18 @@ export default function SearchBar({ products }) {
   return (
     <>
       <div>
-        <div className={styles.searchInputs}>
+        <div className={styles.searchInputsdiv}>
+          {/* ---------------------------------------- */}
           <input
-            className="form-control"
+            className={styles.searchinput}
             value={wordEntered}
             onChange={handelFilter}
             type="text"
             placeholder={"Search"}
-          />
-          <div className={styles.searchIcon && styles.svg}>
+          /> 
+           <div className={styles.icons && styles.svg}>
             {filteredData.length === 0 ? (
-              <SearchIcon fontSize="23" />
+              <SearchIcon fontSize="22" />
             ) : (
               <CloseIcon
                 fontSize="23"
@@ -64,6 +65,8 @@ export default function SearchBar({ products }) {
             )}
           </div>
         </div>
+          {/* ---------------------------------------- */}
+
         {filteredData.length !== 0 && active && (
           <div
             style={{ top: "120%", width: "93.5%" }}

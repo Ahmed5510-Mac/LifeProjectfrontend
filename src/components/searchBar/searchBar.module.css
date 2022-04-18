@@ -1,17 +1,55 @@
-.searchInputs {
+.searchInputsdiv {
     display: flex;
+    background-color:#fff;
+    border-radius: 15px;
+    border: 1px solid rgb(27, 14, 14); 
+    overflow: hidden;
+
+   
   }
+.searchinput
+{
+  border: none;
+  padding:10px ;
+  position: relative;
+}
+.icons
+{
+position: absolute;
+left: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   .search .input {
-    background-color: white;
+   
     border: 0;
     border-radius: 2px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     font-size: 18px;
     padding: 15px;
-    height: 30px;
-    width: 300px;
+
   }
 
   
@@ -19,7 +57,6 @@
   .searchIcon {
     height: 80px;
     width: 80px;
-    background-color: white;
     display: grid;
     place-items: center;
     font-size: 45px;
@@ -30,7 +67,10 @@
   }
 
  .svg {
-    font-size: 35px;
+    font-size: 30px;
+    position: absolute;
+    right: 5px;
+    
   }
   
   .dataResult {

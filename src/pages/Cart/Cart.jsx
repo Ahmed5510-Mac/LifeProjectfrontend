@@ -3,6 +3,7 @@ import "./cart.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { increment ,decrement} from "../../store/cart/cartSlice";
 import { Container } from "@mui/material";
+import { NavLink } from 'react-router-dom';
 
 const Cart = () => {
     const counter =  useSelector((data)=>data.cart.counterValue);
@@ -62,7 +63,7 @@ const Cart = () => {
                             <p className="d-none d-md-block"> subtootal</p>
                             <h4 className="d-md-block d-none "> EGP 198.00</h4>
                         </div>
-                        <button className="btn btn-primary w-100 "> Checkout EGP 198.00 </button>
+                        <NavLink to="/receipts" className="btn btn-primary w-100 "> Checkout EGP 198.00 </NavLink>
                     </div>
                 </div>
             </div>

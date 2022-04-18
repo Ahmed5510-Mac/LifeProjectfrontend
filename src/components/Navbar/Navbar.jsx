@@ -73,11 +73,6 @@ export default function Navbar() {
           <img className="w-50 d-sm-w-25" src={logo} alt="" />
         </NavLink>
         {/* =====element will visable in mobile screen===== */}
-        <input
-          className="form-control  mobilesearch  w-50 d-lg-mx-auto "
-          placeholder="search"
-          type="text"
-        />
         <div className="iconmobile">
           <NavLink to="/register" className="btn  rounded-circle bg-white">
             {" "}
@@ -195,28 +190,6 @@ export default function Navbar() {
               </div>
             </li>
           </ul>
-
-          <div className="search ps-3 pe-3 d-none d-lg-block" id="search">
-            <div
-              className="icon"
-              id="icon"
-              onClick={() => {
-                document.getElementById("search").classList.toggle("active");
-              }}
-            ></div>
-            <div className="input">
-              <input type="text" placeholder="search" id="input-search" />
-              <div className="megMenue position-absolute"></div>
-              <i
-                className="fa-solid fa-delete-left"
-                id="clear"
-                onClick={() =>
-                  (document.getElementById("input-search").value = "")
-                }
-              ></i>
-            </div>
-          </div>
-
           <div className="iconLscreen">
             <NavLink to="/register" className="btn   rounded-circle bg-white">
               {" "}

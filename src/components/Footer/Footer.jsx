@@ -4,8 +4,8 @@ import styles from './footer.module.css'
 const Footer = () => {
   return (
     <>
-      <div className={styles.footerbg}>
-        <footer className="container py-5 " >
+      <div className={styles.footerbg} >
+        <footer className="container pt-5 sticky-bottom " >
           <div className="row m-0 p-1">
          
             <div className="col-md-3 col-sm-12">
@@ -13,8 +13,6 @@ const Footer = () => {
                 <img src={img2} alt="" className="rounded-circle" />
               <h5 className="ms-3">LIFE</h5>
                 </div>
-          
-           
               <ul className="nav flex-column mt-3" >
                 <li className="nav-item mb-2 ">
                   <a href="#/" className="nav-link p-0 link-light">
@@ -117,7 +115,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="d-flex justify-content-between p-4 my-4 border-top">
+          <div className="d-flex justify-content-between pt-4 mt-4 border-top">
             <p>© 2022 life, All rights reserved.</p>
             <ul className="list-unstyled d-flex">
               <li className="ms-3">

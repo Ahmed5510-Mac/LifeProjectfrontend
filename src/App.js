@@ -24,6 +24,7 @@ import Drugs from './components/category/drugs/drugs';
 import News from './components/category/news/news';
 import Other from './components/category/other/other';
 import SearchResult from './pages/SearchResult/searchResult';
+import Receipts from './pages/receipts/receipt'
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -51,6 +52,7 @@ const App = () => {
             <Route path='/product/:id' element={<ProductDetails />} />
             <Route path='/favourite' element={<Favourite />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/receipts' element={<Receipts/>}/>
             <Route path='*' element={<NotFound />} />
        
           </Routes>
