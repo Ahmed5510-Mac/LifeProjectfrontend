@@ -12,9 +12,8 @@ import { reset, logout } from "../../store/auth/authSlice";
 import { getProducts } from "../../store/product/productSlice";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-
-import "./Navbar.css";
 import SearchBar from "../searchBar/searchBar";
+import "./Navbar.css";
 
 export default function Navbar() {
   const counter = useSelector((state) => state.cart.counterValue);
@@ -49,36 +48,26 @@ export default function Navbar() {
 
   return (
     <nav
-      className="navbar container-col-md fixed-top navbar-expand-lg"
+      className="navbar  container-col-md fixed-top navbar-expand-lg"
       id="navBar"
     >
-      <div className="container-fluid position-relative">
-      
-      <div
-        style={{
-          width: "30%",
-          left: 0,
-          right: 0,
-          margin: "auto",
-        }}
-        className="position-absolute nav-item"
-      >
-        <div>
-          <SearchBar 
-          products={products}
-          />
-        </div>
-      </div>
+      <div className="container-fluid  position-relative">
+
         <NavLink className="Cnavbar-brand" to="/">
           <img className="w-50 d-sm-w-25" src={logo} alt="" />
         </NavLink>
+        {/* ----------- */}
+
+
+        {/* ----------- */}
+
         {/* =====element will visable in mobile screen===== */}
-        <div className="iconmobile">
-          <NavLink to="/register" className="btn  rounded-circle bg-white">
+        <div className="iconmobile d-flex flex-row-reverse">
+          <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
             {" "}
             <span className="fa-solid fa-user text-dark"></span>{" "}
           </NavLink>
-          <NavLink to="/cart" className="btn mx-2  rounded-circle bg-white">
+          <NavLink to="/cart" className="btn mx-2  d-lg-none  rounded-circle bg-white">
             {" "}
             <span className="fa-solid fa-cart-shopping text-dark position-relative">
               <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
@@ -86,6 +75,20 @@ export default function Navbar() {
               </span>
             </span>{" "}
           </NavLink>
+
+
+          <div
+            className="  d-lg-none   "
+          >
+            <div className="search-bar position-relative ">
+              <SearchBar
+                products={products}
+              />
+            </div>
+
+          </div>
+
+
         </div>
         {/* ----navbar------ */}
         <button
@@ -99,7 +102,21 @@ export default function Navbar() {
         >
           <i className="fa-solid fa-bars"></i>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+          {/* ------------searchbar-------------- */}
+          <div
+            className=" d-none d-lg-block searchbar-lg"
+          >
+            <div className="search-bar position-relative ">
+              <SearchBar
+                products={products}
+              />
+            </div>
+
+          </div>
+
+                                                                                                                                  
+
           <ul className="navbar-nav ms-auto  mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink

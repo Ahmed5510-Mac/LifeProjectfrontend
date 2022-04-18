@@ -12,32 +12,13 @@
   border: none;
   padding:10px ;
   position: relative;
+  width: 85%;
 }
 .icons
 {
 position: absolute;
 left: 2px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   
@@ -69,7 +50,7 @@ left: 2px;
  .svg {
     font-size: 30px;
     position: absolute;
-    right: 5px;
+    right: 15px;
     
   }
   
