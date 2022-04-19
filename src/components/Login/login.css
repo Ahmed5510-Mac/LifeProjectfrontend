@@ -70,3 +70,10 @@
 {
     box-shadow: 20px 10px 15px gold;
 } */
+
+.error {
+    color: red;
+    text-align: left;
+    margin-left: 40px;
+  }
+  
