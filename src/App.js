@@ -54,6 +54,7 @@ const App = () => {
             <Route path='/cart' element={<Cart />} />
             <Route path='/receipts' element={<Receipts/>}/>
             <Route path='*' element={<NotFound />} />
+
        
           </Routes>
         </BrowserRouter>

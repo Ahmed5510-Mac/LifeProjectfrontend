@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { increment ,decrement} from "../../store/cart/cartSlice";
 import { Container } from "@mui/material";
 import { NavLink } from 'react-router-dom';
+import DeliveryMethod from '../../components/rceipts/DeliveryMethod'
 
 const Cart = () => {
     const counter =  useSelector((data)=>data.cart.counterValue);
@@ -67,6 +68,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
+              <DeliveryMethod/>
         </Container>
     );
 }

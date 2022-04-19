@@ -83,14 +83,6 @@ html::-webkit-scrollbar-thumb {
     color: var(--yellow-color);
 }
 
-.search-bar {
-    /* border-left: 1px solid var(--green-color); */
-  
-}
-
-
-
-
 .navbar .navbar-toggler {
 
     color: #fff;
@@ -188,14 +180,8 @@ html::-webkit-scrollbar-thumb {
         display: block !important;
         width: 30px;
     }
-
     .iconmobile {
         display: block;
-    }
-
-    .iconLscreen {
-        display: none;
-
     }
 
     .megMenue {
@@ -235,7 +221,6 @@ html::-webkit-scrollbar-thumb {
 
     .iconLscreen {
         display: none;
-        border: 5px solid red;
     }
 
     .megMenue {
@@ -287,14 +272,16 @@ html::-webkit-scrollbar-thumb {
         margin-left: -18px;
     }
 .search-bar {
-        /* border-left: 1px solid var(--green-color); */
-        background-color: red;
+        
         width: 170px;
       
     }
     .iconmobile
     {
-        border: 2px solid red;
         margin-right: -100px;
+    }
+
+    .logout-mob{
+        display: none !important
     }
 }

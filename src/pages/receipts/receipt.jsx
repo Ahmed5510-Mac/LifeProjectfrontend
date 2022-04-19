@@ -22,27 +22,27 @@ function Receipt() {
                                     {/* ------------nameinput-------------- */}
                                     <div className="name d-flex form-recipts justify-content-between">
                                         <div className="mb-3 divinput col-sm-12 col-md-5  ">
-                                            <label for="exampleInputEmail1" className="form-label"> First Name</label>
+                                            <label htmlFor="exampleInputEmail1" className="form-label"> First Name</label>
                                             <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                                         </div>
                                         <div className="mb-3 divinput col-sm-12 col-md-5 ">
-                                            <label for="exampleInputPassword1" className="form-label">Last Name</label>
+                                            <label htmlFor="exampleInputPassword1" className="form-label">Last Name</label>
                                             <input type="taxt" className="form-control " id="exampleInputPassword1" />
                                         </div>
                                     </div>
                                         {/* mobil input */}
                                     <div className="mb-3 col-sm-12 col-md-12 ">
-                                        <label for="exampleInputPassword1" className="form-label">mobile number</label>
+                                        <label htmlFor="exampleInputPassword1" className="form-label">mobile number</label>
                                         <input type="number" className="form-control " id="exampleInputPassword1" />
                                     </div>
                                     {/* -----------------addredss--------------------- */}
                                     <div className="form-group mb-3">
-                                        <label for="exampleFormControlTextarea1">street-name/ building number/ flat number</label>
+                                        <label htmlFor="exampleFormControlTextarea1">street-name/ building number/ flat number</label>
                                         <textarea className="form-control" placeholder='address' id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
                                     {/* -----------------Governorate--------------------- */}
                                     <div className="form-group my-2">
-                                        <label for="exampleFormControlSelect1"> choose Governorate </label>
+                                        <label htmlFor="exampleFormControlSelect1"> choose Governorate </label>
                                         <select className="form-control" id="exampleFormControlSelect1">
                                         <option>kaf elshikh</option>
                                         <option>cairo</option>
@@ -53,7 +53,7 @@ function Receipt() {
                                     </div>
                                     {/* -----------------city--------------------- */}
                                     <div className="form-group mb-3">
-                                        <label for="exampleFormControlSelect1"> choose city </label>
+                                        <label htmlFor="exampleFormControlSelect1"> choose city </label>
                                         <select className="form-control" id="exampleFormControlSelect1">
                                         <option>kaf elshikh</option>
                                         <option>cairo</option>

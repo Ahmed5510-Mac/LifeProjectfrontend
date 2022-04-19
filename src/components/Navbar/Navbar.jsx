@@ -10,6 +10,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { reset, logout } from "../../store/auth/authSlice";
 import { getProducts } from "../../store/product/productSlice";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import SearchBar from "../searchBar/searchBar";
 import "./Navbar.css";
 
@@ -23,8 +25,9 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const  user  = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
+  //  const [className, setclassName] = useState('nav-transparent');
 
   window.onscroll = function () {
     let myNav = document.getElementById("navBar");
@@ -36,11 +39,10 @@ export default function Navbar() {
       myNav.classList.add("navbar-shrink");
     }
   };
-
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate("/register");
+    navigate("/");
   };
 
   return (
@@ -55,17 +57,16 @@ export default function Navbar() {
         </NavLink>
         {/* ----------- */}
 
-
-        {/* ----------- */}
-
         {/* =====element will visable in mobile screen===== */}
         <div className="iconmobile d-flex flex-row-reverse">
-          
-          <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
-            {" "}
-            <span className="fa-solid fa-user text-dark"></span>{" "}
-          </NavLink>
-          
+        {user ? (
+              <button className="btn logout-mob ms-2 d-lg-none  rounded-circle bg-white" onClick={onLogout}>
+                <i className="fa-solid fa-arrow-right-from-bracket  "></i>
+              </button>
+            ) : (
+              <></>
+            )}
+          {/* -------- */}
           <NavLink to="/cart" className="btn mx-2  d-lg-none  rounded-circle bg-white">
             {" "}
             <span className="fa-solid fa-cart-shopping text-dark position-relative">
@@ -74,7 +75,12 @@ export default function Navbar() {
               </span>
             </span>{" "}
           </NavLink>
-        
+
+          <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
+            {" "}
+            <span className="fa-solid fa-user text-dark"></span>{" "}
+          </NavLink>
+
           <div
             className="  d-lg-none   "
           >
@@ -83,10 +89,7 @@ export default function Navbar() {
                 products={products}
               />
             </div>
-
           </div>
-
-
         </div>
         {/* ----navbar------ */}
         <button
@@ -111,8 +114,7 @@ export default function Navbar() {
               />
             </div>
 
-          </div>
-
+          </div>                                                                                                                  
 
           <ul className="navbar-nav ms-auto  mb-2 mb-lg-0">
             <li className="nav-item">
@@ -204,12 +206,12 @@ export default function Navbar() {
               </div>
             </li>
           </ul>
-          <div className="iconLscreen">
-            <NavLink to="/register" className="btn   rounded-circle bg-white">
+          <div className="iconLscreen d-flex">
+            <NavLink to="/register" className="btn  d-none  d-lg-block rounded-circle bg-white">
               {" "}
               <span className="fa-solid fa-user text-dark"></span>{" "}
             </NavLink>
-            <NavLink to="/cart" className="btn mx-2 rounded-circle bg-white">
+            <NavLink to="/cart" className="btn mx-2  d-none d-lg-block rounded-circle bg-white">
               {" "}
               <span className="fa-solid fa-cart-shopping text-dark position-relative">
                 <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
@@ -217,9 +219,10 @@ export default function Navbar() {
                 </span>
               </span>{" "}
             </NavLink>
+
             {user ? (
-              <button className="btn" onClick={()=>onLogout()}>
-                <span className="fa-solid fa-arrow-right-from-bracket text-danger"></span>
+              <button className="btn logout-lg ms-2  d-md-none d-lg-block rounded-circle bg-white" onClick={onLogout}>
+                <i className="fa-solid fa-arrow-right-from-bracket  "></i>
               </button>
             ) : (
               <></>
