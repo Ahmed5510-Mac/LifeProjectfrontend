@@ -6,6 +6,7 @@ import favouriteSlice from './favourite/favouriteSlice';
 import discountSlice from './offers/offersSlice';
 import authProductSlice from './cart/authProductCart'
 import authProductCart from './cart/authProductCart';
+import categorySlice from './category/categorySlice';
 
 
 export const store = configureStore({
@@ -15,7 +16,9 @@ export const store = configureStore({
     auth:authReducer,
     favourite:favouriteSlice,
     discounts: discountSlice,
-    auth:authProductCart
+    // auth:authProductCart,
+    categories:categorySlice
+
 
   },
 });

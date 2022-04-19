@@ -10,8 +10,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { reset, logout } from "../../store/auth/authSlice";
 import { getProducts } from "../../store/product/productSlice";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import SearchBar from "../searchBar/searchBar";
 import "./Navbar.css";
 
@@ -25,9 +23,8 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const  user  = useSelector((state) => state.auth);
 
-  //  const [className, setclassName] = useState('nav-transparent');
 
   window.onscroll = function () {
     let myNav = document.getElementById("navBar");
@@ -43,7 +40,7 @@ export default function Navbar() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate("/");
+    navigate("/register");
   };
 
   return (
@@ -63,10 +60,12 @@ export default function Navbar() {
 
         {/* =====element will visable in mobile screen===== */}
         <div className="iconmobile d-flex flex-row-reverse">
+          
           <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
             {" "}
             <span className="fa-solid fa-user text-dark"></span>{" "}
           </NavLink>
+          
           <NavLink to="/cart" className="btn mx-2  d-lg-none  rounded-circle bg-white">
             {" "}
             <span className="fa-solid fa-cart-shopping text-dark position-relative">
@@ -75,8 +74,7 @@ export default function Navbar() {
               </span>
             </span>{" "}
           </NavLink>
-
-
+        
           <div
             className="  d-lg-none   "
           >
@@ -115,7 +113,6 @@ export default function Navbar() {
 
           </div>
 
-                                                                                                                                  
 
           <ul className="navbar-nav ms-auto  mb-2 mb-lg-0">
             <li className="nav-item">
@@ -220,10 +217,9 @@ export default function Navbar() {
                 </span>
               </span>{" "}
             </NavLink>
-
             {user ? (
-              <button className="btn" onClick={onLogout}>
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>
+              <button className="btn" onClick={()=>onLogout()}>
+                <span className="fa-solid fa-arrow-right-from-bracket text-danger"></span>
               </button>
             ) : (
               <></>

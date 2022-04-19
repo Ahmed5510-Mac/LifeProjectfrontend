@@ -116,11 +116,7 @@ export const login = createAsyncThunk(
   async (userData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.post("http://localhost:8080/login", userData, {
-        headers: {
-          "Content-type": "application/json;charset=UTF-8",
-        },
-      });
+      const res = await axios.post("http://localhost:8080/login", userData);
       if (res.data) {
         localStorage.setItem("user", JSON.stringify(res.data));
       }

@@ -76,11 +76,23 @@ const initialState = {
   isLoading: false,
   error: null,
   productInfo: null,
+  filteredCategoryProducts:[],
+  filteredPriceProducts:[]
 };
 
 export const productSlice = createSlice({
   name: 'product',
   initialState,
+  reducers:{
+    setFilteredProduct:(state, action)=>{
+      console.log(action.payload)
+      state.filteredCategoryProducts = action.payload
+    },
+    setFiltredPrice:(state, action)=>{
+      console.log(action.payload)
+      state.filteredPriceProducts = action.payload
+    },
+  },
   extraReducers: {
     //get-products
     [getProducts.pending]: (state, action) => {
@@ -141,4 +153,5 @@ export const productSlice = createSlice({
   },
 });
 
+export const {setFilteredProduct,setFiltredPrice} = productSlice.actions;
 export default productSlice.reducer;

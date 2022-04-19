@@ -43,7 +43,8 @@ const Login = ({ handleChange }) => {
             email,password
         }
         dispatch(login(userData))
-          
+        navigate('/')
+
     }
 
     const { email,password} = formData
