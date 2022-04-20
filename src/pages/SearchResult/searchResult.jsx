@@ -4,9 +4,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OfferCard from "../../components/offersCard/offersCard";
 import { useLocation } from "react-router-dom";
+import { getTotals } from "../../store/cart/cartSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,13 +19,16 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function SearchResult() {
   const { selectedOfferProduct } = useSelector((state) => state.discounts);
   const { products } = useSelector((state) => state.products);
-
+  const dispatch=useDispatch()
   const { pathname } = useLocation();
+  const cart = useSelector((state) => state.cart);
 
   React.useEffect(() => {
     console.log(selectedOfferProduct);
+    dispatch(getTotals());
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname,cart]);
+
   const seachCard =
     selectedOfferProduct &&
     products &&
@@ -42,6 +46,7 @@ export default function SearchResult() {
         return (
           <Grid key={index} item xs={6} md={4} sm={6}>
             <OfferCard
+             product={item}
               productId={item._id}
               productName={item.productName}
               maxNumOfProducts={item.quantity}

@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {  CircularProgress, Container } from "@mui/material";
-
+import { getTotals } from "../../../store/cart/cartSlice";
 import { getProducts } from "../../../store/product/productSlice";
 import CategoryCard from "../../CategoryCard/CategoryCard";
 import OfferCard from "../../offersCard/offersCard";
@@ -15,8 +15,14 @@ import OfferCard from "../../offersCard/offersCard";
 const News = () => {
 
   const { products,isLoading } = useSelector((state) => state.products);
+  const cart = useSelector((state) => state.cart);
 
   const dispach = useDispatch();
+
+  useEffect(() => {
+    dispach(getTotals());
+  }, [cart]);
+
 
   useEffect(() => {
     dispach(getProducts());
@@ -51,6 +57,7 @@ const News = () => {
             my={1}
           >
             <OfferCard
+              product={product}
               productId={product._id}
               productName={product.productName}
               maxNumOfProducts={product.quantity}

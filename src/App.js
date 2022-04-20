@@ -20,7 +20,7 @@ import ProductDetails from './pages/details/productDetails';
 import Favourite from './pages/favourite/favourite';
 import Tools from './components/category/tools/tools';
 import Units from './components/category/units/units';
-import Drugs from './components/category/drugs/drugs';
+// import Drugs from './components/category/drugs/drugs';
 import News from './components/category/news/news';
 import Other from './components/category/other/other';
 import SearchResult from './pages/SearchResult/searchResult';
@@ -40,13 +40,13 @@ const App = () => {
             <Route path='/register' element={<Registration />} />
             <Route path='/contactus' element={<Contact />} />
             <Route path='/about' element={<About />} />
-            <Route path='/details' element={<Deatails2/>} />
+            <Route path='/details/:id' element={<Deatails2/>} />
             <Route path='/offers' element={<SeeAllOffers/>} />
             <Route path='/products' element={<Product />} />
             <Route path='/searchResult' element={<SearchResult/>}/>
             <Route path='/tools' element={<Tools />} />
             <Route path='/units' element={<Units />} />
-            <Route path='/drugs' element={<Drugs />} />
+            {/* <Route path='/drugs' element={<Drugs />} /> */}
             <Route path='/news' element={<News />} />
             <Route path='/others' element={<Other />} />
             <Route path='/product/:id' element={<ProductDetails />} />

@@ -21,20 +21,25 @@ export default function OfferCard({
   ratingValue,
   image,
   productId,
-  description
+  description,
+  product
 }) {
   
-  let priceAfter = (priceBefore * discountPersentatge) / 100;
+  let priceAfter = discountPersentatge !== 0 ?(priceBefore * discountPersentatge) / 100 :priceBefore;
+
   const navigate= useNavigate()
   const dispatch=useDispatch()
 
   const onClick=()=>{
-   dispatch(selectProduct(productId))
-   navigate('/details')
+   navigate(`/details/${product._id}`,{
+     state :{
+       selectedProduct:product
+     }
+   })
  }
   return (
-    <Card className={styles.draft} sx={{ maxWidth: 300,  marginY: 1 ,flexWrap: 'wrap' }}>
-      <CardActionArea onClick={onClick}>
+    <Card  className={styles.draft} sx={{ maxWidth: 300,  marginY: 1 ,flexWrap: 'wrap' }}>
+     <div onClick={onClick} style={{padding:0,matgin:0}}>
         <CardMedia
           sx={{
             display: "block",
@@ -74,14 +79,22 @@ export default function OfferCard({
             {`EGP ${priceAfter}`}
           </Typography>
           <Typography
-            sx={{ textDecoration: "line-through" }}
+            sx={{ textDecoration: "line-through",display:"inline" ,visibility:`${discountPersentatge !== 0?'visable':'hidden'}`}}
             gutterBottom
             variant="h8"
             component="div"
           >
             {`EGP ${priceBefore}`}
-          </Typography>
-
+            </Typography>
+            <span
+                style={{
+                  visibility:`${discountPersentatge !== 0?'visable':'hidden'}`,
+                  marginLeft: "10%",
+                  color: "#aa2e25",
+                  padding: "2px",
+                  backgroundColor: "#ffd54f",
+                }}
+              >{`-${discountPersentatge}%`}</span>
           <Box sx={{ display: "center", alignItems: "center" }}>
             <Rating
               sx={{ paddingTop: "3%" }}
@@ -99,10 +112,12 @@ export default function OfferCard({
             maxNumOfProducts={maxNumOfProducts}
             numOfProductsThatReduced={numOfProductsThatReduced}
           />
-        </CardContent>
-      </CardActionArea>
-      <CardActions style={{justifyContent: 'center'}} >
-      <CartButtons />
+        </CardContent>  
+        </div>
+      <CardActions  style={{justifyContent: 'center'}} >
+      <CartButtons
+      product={product}
+      />
       </CardActions>
       
       

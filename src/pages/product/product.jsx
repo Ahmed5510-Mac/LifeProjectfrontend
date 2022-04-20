@@ -5,6 +5,7 @@ import img7 from "../../assets/img7.jpg";
 
 const Product = () => {
 
+  
   return (
     <>
      <CategoryCard image={img7} />

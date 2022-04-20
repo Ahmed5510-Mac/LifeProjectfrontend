@@ -8,14 +8,22 @@ import {  CircularProgress, Container } from "@mui/material";
 import { getProducts } from "../../../store/product/productSlice";
 import CategoryCard from "../../CategoryCard/CategoryCard";
 import OfferCard from "../../offersCard/offersCard";
+import { getTotals } from "../../../store/cart/cartSlice";
+
 
 
 const Other = () => {
- 
+
+  const cart = useSelector((state) => state.cart);
   const { products,isLoading } = useSelector((state) => state.products);
 
   
   const dispach = useDispatch();
+  
+  useEffect(() => {
+    dispach(getTotals());
+  }, [cart]);
+
 
   useEffect(() => {
     dispach(getProducts());
@@ -50,6 +58,7 @@ const Other = () => {
             my={1}
           >
             <OfferCard
+              product={product}
               productId={product._id}
               productName={product.productName}
               maxNumOfProducts={product.quantity}

@@ -25,6 +25,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
 
   //  const [className, setclassName] = useState('nav-transparent');
@@ -215,7 +216,7 @@ export default function Navbar() {
               {" "}
               <span className="fa-solid fa-cart-shopping text-dark position-relative">
                 <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
-                  {counter}
+                {cart.cartTotalQuantity}
                 </span>
               </span>{" "}
             </NavLink>

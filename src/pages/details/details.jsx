@@ -11,7 +11,12 @@ import CartButtons from "../../components/Deatails/detailsCartButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addFavourite } from "../../store/auth/authSlice";
+import {
+  addFavourite,
+  deleteFavourite,
+} from "../../store/auth/authSlice";
+import { getSelectedProduct } from "../../store/offers/offersSlice";
+import { getTotals } from "../../store/cart/cartSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -28,58 +33,59 @@ export default function Deatails2() {
   const myfavourites = useSelector((state) => state.auth.myfavourites);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location =useLocation()
+  let myVariable =location.state.selectedProduct
+  const cart = useSelector((state) => state.cart);
+   
+console.log(myVariable);
 
   React.useEffect(() => {
-    if (user &&myfavourites.length != 0 ) {
-      if (
-        myfavourites[0].favouriteProducts.find(
-          (item) => item._id === selectedOfferProduct._id
-        )
-      ) {
+    dispatch(getTotals());
+    window.scrollTo(0, 0);
+    if (user && myfavourites.length != 0  ) {
+      if (myfavourites.find((item) => item._id === myVariable._id)){
         setIsActive(true);
       } else {
         setIsActive(false);
       }
-    }else if(user && myfavourites.length === 0){
-      setIsActive(true);
-      //add to favorite Array
-      dispatch(addFavourite({ selectedOfferProduct, ownerId: user.customer._id }));
-    }else {
-      setIsActive(false);
-    }
-  },[dispatch,navigate,myfavourites]);
+    } 
+  },[location.pathname,cart]);
+
 
   const handleSelect = () => {
-    if (user &&myfavourites.length != 0 ) {
-      if (
-        myfavourites[0].favouriteProducts.find(
-          (item) => item._id === selectedOfferProduct._id
-        )
-      ) {
+    if (user && myfavourites.length != 0) {
+      if (myfavourites.find((item) => item._id === myVariable._id)) {
+        console.log(true);
         setIsActive(false);
+        
         // delete from favorite Array'
+        dispatch(
+          deleteFavourite({
+            productId: myVariable._id,
+            ownerId: user.customer._id,
+          })
+        );
       } else {
         setIsActive(true);
         //add to favorite Array
-        dispatch(addFavourite({ selectedOfferProduct, ownerId: user.customer._id }));
+        dispatch(
+          addFavourite({ myVariable, ownerId: user.customer._id })
+        );
       }
-    }else if(user && myfavourites.length === 0){
+    } else if (user && myfavourites.length === 0) {
       setIsActive(true);
       //add to favorite Array
-      dispatch(addFavourite({ selectedOfferProduct, ownerId: user.customer._id }));
-    }else {
+      dispatch(
+        addFavourite({ myVariable, ownerId: user.customer._id })
+      );
+    } else {
       navigate("/register");
     }
   };
 
-  const { pathname } = useLocation();
-
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
 
   return (
-    selectedOfferProduct && (
+    myVariable && (
       <Container sx={{ marginY: "4%" }}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
@@ -89,8 +95,8 @@ export default function Deatails2() {
                   <Grid item xs={12} md={6} sm={12}>
                     <div style={{ maxWidth: "80%" }}>
                       <ImageGallaryComponent
-                        title={selectedOfferProduct.productName}
-                        image={selectedOfferProduct.image}
+                        title={myVariable.productName}
+                        image={myVariable.image}
                       />
                     </div>
                   </Grid>
@@ -105,10 +111,10 @@ export default function Deatails2() {
                           }}
                           color="text.primary"
                         >
-                          {selectedOfferProduct.productName}
+                          {myVariable.productName}
                         </Typography>
                         <Typography sx={{ fontSize: 20 }} color="text.primary">
-                          {selectedOfferProduct.description}
+                          {myVariable.description}
                         </Typography>
                       </Grid>
                       <Grid item xs={2}>
@@ -129,33 +135,36 @@ export default function Deatails2() {
                         name="simple-controlled"
                         readOnly
                         value={
-                          selectedOfferProduct.rating == "undefined" ||
-                          selectedOfferProduct.rating == null
+                          myVariable.rating == "undefined" ||
+                          myVariable.rating == null
                             ? 0
-                            : selectedOfferProduct.rating
+                            : myVariable.rating
                         }
                         size="small"
                       />
                       <Typography variant="body2" component="p" marginLeft={1}>
                         <a href="#">{`(${
-                          selectedOfferProduct.rating == "undefined" ||
-                          selectedOfferProduct.rating == null
+                          myVariable.rating == "undefined" ||
+                          myVariable.rating == null
                             ? 0
-                            : selectedOfferProduct.rating
+                            : myVariable.rating
                         } verified ratings)`}</a>
                       </Typography>
                     </Box>
                     <DiscountCard
-                      productName={selectedOfferProduct.productName}
-                      maxNumOfProducts={selectedOfferProduct.quantity}
+                      productName={myVariable.productName}
+                      maxNumOfProducts={myVariable.quantity}
                       numOfProductsThatReduced={3}
-                      priceBefore={selectedOfferProduct.price}
+                      priceBefore={myVariable.price}
                       discountPersentatge={
-                        selectedOfferProduct.discount.discountAmount
+                      myVariable.discount.discountAmount
                       }
                     />
                     <CardActions style={{ justifyContent: "center" }}>
-                      <CartButtons />
+                      <CartButtons 
+                      
+                      product={myVariable}
+                      />
                     </CardActions>
                   </Grid>
                 </Grid>

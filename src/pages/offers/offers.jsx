@@ -6,9 +6,10 @@ import Grid from "@mui/material/Grid";
 import OfferCard from "../../components/offersCard/offersCard";
 import OffersContainer from "../../components/offersContainer/offersContainer";
 import { Container } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsInDiscount } from "../../store/offers/offersSlice";
+import { getTotals } from "../../store/cart/cartSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -23,14 +24,20 @@ export default function SeeAllOffers() {
     (state) => state.discounts
   );
   const dispatch = useDispatch();
+  const navigate =useNavigate();
 
 
   const { pathname } = useLocation();
+  const cart = useSelector((state) => state.cart);
 
   React.useEffect(() => {
     dispatch(getProductsInDiscount(oneDiscount));
+    dispatch(getTotals());
+  }, [cart]);
+  
+  React.useEffect(()=>{
     window.scrollTo(0, 0);
-  }, [pathname]);
+  },[pathname])
 
   const offerCard =
     productsInDiscount &&
@@ -38,6 +45,7 @@ export default function SeeAllOffers() {
       return (
         <Grid key={index} item xs={6} md={3} sm={6}>
           <OfferCard
+            product={item}
             productId={item._id}
             productName={item.productName}
             maxNumOfProducts={item.quantity}

@@ -85,6 +85,7 @@ const SliderComponent = ({ colorStyle, textColor, discountId }) => {
         return (
           <div key={index}>
             <OffersCard
+              product={item}
               productName={item.productName}
               maxNumOfProducts={item.quantity}
               numOfProductsThatReduced={2}

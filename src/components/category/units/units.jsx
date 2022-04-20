@@ -7,13 +7,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../store/product/productSlice";
 import CategoryCard from "../../CategoryCard/CategoryCard";
 import OfferCard from "../../offersCard/offersCard";
+import { getTotals } from "../../../store/cart/cartSlice";
+
+
+
 
 const Units = () => {
   const { products,isLoading } = useSelector((state) => state.products);
-
+  const cart = useSelector((state) => state.cart);
   const dispach = useDispatch();
+  
+  useEffect(() => {
+    dispach(getTotals());
+  }, [cart]);
+
+  
   useEffect(() => {
     dispach(getProducts());
+
   }, [dispach]);
 
   const result = products.find(({ category }) => category.name === "units");
@@ -38,6 +49,7 @@ const Units = () => {
                 return (
                   <Grid item lg={3} md={4} sm={6} xs={6} key={index} my={1}>
                     <OfferCard
+                      product={product}
                       productId={product._id}
                       productName={product.productName}
                       maxNumOfProducts={product.quantity}

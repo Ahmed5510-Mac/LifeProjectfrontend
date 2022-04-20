@@ -5,30 +5,32 @@ import { removeItem } from "../../store/favourite/favouriteSlice";
 import OfferCard from "../../components/offersCard/offersCard";
 import { useEffect } from "react";
 import { deleteFavourite, getFavourite } from "../../store/auth/authSlice";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const Favourite = () => {
   const myfavourites = useSelector((state) => state.auth.myfavourites);
-  const user =useSelector((state)=>state.auth.user)
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-let favoriteCard=''
+  const navigate = useNavigate();
+  let favoriteCard = "";
 
-console.log(user);
+  console.log(user);
 
-useEffect(()=>{
-  if(user){
-dispatch(getFavourite( user.customer._id)) 
-  }
-},[]);
+  // useEffect(() => {
+  //   window.scroll(0, 0);
+  //   if (user) {
+  //     dispatch(getFavourite(user.customer._id));
+  //   }
+  // }, []);
 
-
-  if(user&&myfavourites.length != 0){
-     favoriteCard =
-    myfavourites[0].favouriteProducts &&
-    myfavourites[0].favouriteProducts.map((item, index) => {
+  if (user && myfavourites.length != 0) {
+    favoriteCard =
+      myfavourites &&
+      myfavourites.map((item, index) => {
         return (
           <Grid key={index} item xs={6} md={3} sm={6}>
             <Box sx={{ position: "relative" }}>
               <OfferCard
+                product={item}
                 productId={item._id}
                 productName={item.productName}
                 maxNumOfProducts={item.quantity}
@@ -48,16 +50,25 @@ dispatch(getFavourite( user.customer._id))
                   fontSize: "35px",
                   color: "#ff5722",
                 }}
-                onClick={() => dispatch(deleteFavourite({productId:item._id,ownerId:user.customer._id}))}
+                onClick={() => {
+                  
+                  dispatch(
+                    deleteFavourite({
+                      productId: item._id,
+                      ownerId: user.customer._id,
+                    })
+                  );
+                  // dispatch(getFavourite(user.customer._id));
+                  navigate("/favourite");
+                }}
                 cursor="pointer"
               />
             </Box>
           </Grid>
         );
       });
-  
   }
-  
+
   return (
     <>
       <Container sx={{ marginY: "5%" }}>
@@ -77,7 +88,7 @@ dispatch(getFavourite( user.customer._id))
             >
               You don't have any favourites
             </Alert>
-          </Box>  
+          </Box>
         ) : (
           <Box sx={{ flexGrow: 1 }} my={3}>
             <Grid

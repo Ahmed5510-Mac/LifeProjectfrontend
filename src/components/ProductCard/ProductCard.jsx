@@ -3,15 +3,22 @@ import Grid from "@mui/material/Grid";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/product/productSlice";
+import { getTotals } from "../../store/cart/cartSlice";
 import OfferCard from "../offersCard/offersCard";
+
 
 const ProductCard = () => {
   const { products,isLoading } = useSelector((state) => state.products);
-
+  const cart = useSelector((state) => state.cart);
   const dispach = useDispatch();
+
+  useEffect(() => {
+    dispach(getTotals());
+  }, [cart]);
+
+
   useEffect(() => {
     dispach(getProducts());
-    
   }, [dispach]);
 
   return (
@@ -33,6 +40,7 @@ const ProductCard = () => {
             
           >
             <OfferCard
+              product={product}
               productId={product._id}
               productName={product.productName}
               maxNumOfProducts={product.quantity}

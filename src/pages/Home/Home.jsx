@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDiscounts } from "../../store/offers/offersSlice";
 import { getProducts } from "../../store/product/productSlice";
+import { getTotals } from "../../store/cart/cartSlice";
 
 const Home = () => {
   const { discounts } = useSelector((state) => state.discounts);
@@ -15,6 +16,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getDiscounts());
     dispatch(getProducts());
+    dispatch(getTotals());
     console.log("first");
   }, []);
 
@@ -33,6 +35,7 @@ const Home = () => {
             </Container>
             <Container>
               <SliderComponent
+                
                 discountId={item._id}
                 colorStyle={item.style.fontColor}
                 textColor={item.style.layoutColor}
@@ -46,7 +49,7 @@ const Home = () => {
   return (
     <>
       <Slider />
-      <Container sx={{ marginY: 5 }}>
+      <Container sx={{ marginY: 5}}>  
         <Draft imageSrc={"https://picsum.photos/1120/300"} />
       </Container>
 
