@@ -2,14 +2,33 @@ import React from "react";
 import { Container } from "@mui/material";
 import ShipmentDetails from "../../components/rceipts/ShipmentDetails"
 import PriceDetails from "../../components/rceipts/price-details"
+import { useDispatch, useSelector } from 'react-redux';
+import {useEffect}from "react"
+import { toggle } from "../../store/receipts/receiptSlice";
+import { getUserInfo} from "../../store/receipts/receiptSlice"
 function DeliveryMethod() {
+
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, [dispatch]);
+  
+  console.log(dispatch)
+
+     
     
   return (
-    <Container sx={{ marginY: "10%" }}>
+    <Container>
       <div className="container-md mob-cart-Container   ">
         <div className="row">
-          <div className="jumbotron border  col-md-8 shadow p-3 mb-5 bg-white rounde text-capitalize col-sm-12">
-            <h5> DELIVERY METHOD</h5>
+          <div className="jumbotron border w-100 shadow p-3 mb-5 bg-white rounde text-capitalize col-sm-12">
+            <div className="title d-flex justify-content-between">
+              <h5> DELIVERY METHOD</h5>
+              <button className="btn text-warning" onClick={()=>dispatch(toggle())}>modify</button>
+
+            </div>
             <hr />
             <div className="container">
               <h6>Door Delivery</h6>
