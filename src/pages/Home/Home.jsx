@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { getDiscounts } from "../../store/offers/offersSlice";
 import { getProducts } from "../../store/product/productSlice";
 import { getTotals } from "../../store/cart/cartSlice";
+import CategoryDraft from "../../components/categoryDraft/CategoryDraft"
 
 const Home = () => {
   const { discounts } = useSelector((state) => state.discounts);
@@ -26,6 +27,7 @@ const Home = () => {
       return (
         <div key={index}>
           <Container>
+        
             <Container>
               <OffersDraft
                 discountId={item._id}
@@ -50,10 +52,11 @@ const Home = () => {
     <>
       <Slider />
       <Container sx={{ marginY: 5}}>  
-        <Draft imageSrc={"https://picsum.photos/1120/300"} />
+       <CategoryDraft/>
       </Container>
 
       {offer}
+      
     </>
   );
 };

@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import styles from './draft.module.css'
 
 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -17,7 +18,8 @@ export default function Draft({imageSrc}){
     return(
     
      <Item>
-    <img className={styles.draft} src={imageSrc}/>
+        <img className={styles.draft} src={imageSrc} />
+        
      </Item>
     
     )
