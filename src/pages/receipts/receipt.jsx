@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from "@mui/material";
 import Orderes from '../../components/rceipts/orderes'
 import "./recepts.css"
@@ -7,15 +7,33 @@ import DeliveryMethod from '../../components/rceipts/DeliveryMethod'
 import { useNavigate } from 'react-router-dom';
  import { useDispatch, useSelector } from 'react-redux';
 import {toggle} from "../../store/receipts/receiptSlice";
+import { getTotals } from '../../store/cart/cartSlice';
  function Receipt() {
       const receiptState = useSelector((state) => state.reciptSlice.value)
-     
-    const dispatch = useDispatch()
+      const cart = useSelector((state) => state.cart);
+      console.log(cart);
+
+      const dispatch =useDispatch() 
+      useEffect(() => {
+        dispatch(getTotals());
+      }, [cart]);
+
+
+
+      const orderCard=cart.cartItems.map((item,index)=>{
+          return(<>
+           <Orderes
+
+        product={item}
+        />
+          </>)
+   });
+
     const navigate=useNavigate()
     return (
         <Container sx={{ marginY: "5%" }}>
             
-            <div className="container-md mob-cart-Container   ">
+            <div className="container-md mob-cart-Container ">
                 <div className="row">
                     <div className="parent col-md-8">
                          {
@@ -85,18 +103,16 @@ import {toggle} from "../../store/receipts/receiptSlice";
                     </div>
                     {/* ---------cart summry----------- */}
                      <div className="cart-order  ms-2 border col-md-3 mt-2 mt-md-0 shadow p-3 mb-5 bg-white  rounde text-capitalize h-50 ">
-                        <h5 className="d-md-block d-none"> YOUR ORDER(4 items)</h5>
+                        <h5 className="d-md-block d-none"> {`YOUR ORDER(${cart.cartTotalQuantity} items)`}</h5>
                         <hr className="d-md-block d-none" />
                         <div className="orders">
-                                <Orderes/>
-                                <Orderes/>
-                                <Orderes/>
-                                <Orderes/>
-                                <Orderes/>
-                                <Orderes/>
-                        </div>
+                               
+                                {orderCard}
+                        </div>  
                         
-                       <PriceDetails/>
+                       <PriceDetails
+                       
+                       />
                         <button  className="btn  w-100 font-weight-bold" onClick={()=>navigate("/cart")}>MODIFY CART</button>
                     </div> 
 

@@ -18,6 +18,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate =useNavigate();
+  const user =useSelector((state)=>state.auth.user)
   const counter = useSelector((data) => data.cart.counterValue);
 
   console.log(cart);
@@ -182,7 +183,7 @@ const Cart = () => {
                       <p className="d-none d-md-block"> subtootal</p>
                       <h4 className="d-md-block d-none ">{`EGP ${cart.cartTotalAmount}`}</h4>
                     </div>
-                    <button onClick={()=>navigate('/receipts')} className="btn btn-primary w-100 ">
+                    <button onClick={()=>user?navigate('/receipts'):navigate('/register')} className="btn btn-primary w-100 ">
                     {`Checkout EGP ${cart.cartTotalAmount}`}
                        
                     </button>
