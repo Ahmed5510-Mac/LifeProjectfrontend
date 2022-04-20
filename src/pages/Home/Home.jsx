@@ -46,7 +46,7 @@ const Home = () => {
   return (
     <>
       <Slider />
-      <Container sx={{ marginY: 5}}>  
+      <Container sx={{ marginY: 5 }}>
         <Draft imageSrc={"https://picsum.photos/1120/300"} />
       </Container>
 

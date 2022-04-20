@@ -58,7 +58,6 @@ const App = () => {
        
           </Routes>
         </BrowserRouter>
-        <ToastContainer/>
         <Footer />
       </ThemeProvider>
     </>
