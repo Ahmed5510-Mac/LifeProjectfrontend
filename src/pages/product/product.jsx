@@ -7,13 +7,11 @@ const Product = () => {
 
   return (
     <>
-      <Container >
-        <Box mt={10}>
-        <CategoryCard image={img7}  />
-        <Grid container  spacing={5} >
-            <ProductCard />
+     <CategoryCard image={img7} />
+      <Container>
+        <Grid container spacing={5}>
+          <ProductCard />
         </Grid>
-        </Box>
       </Container>
     </>
   );

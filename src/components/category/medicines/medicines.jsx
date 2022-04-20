@@ -1,23 +1,25 @@
-import { CircularProgress, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { CircularProgress, Container } from "@mui/material";
+
 import { getProducts } from "../../../store/product/productSlice";
 import CategoryCard from "../../CategoryCard/CategoryCard";
 import OfferCard from "../../offersCard/offersCard";
 
-const Units = () => {
+const Medicines = () => {
   const { products,isLoading } = useSelector((state) => state.products);
 
   const dispach = useDispatch();
+
   useEffect(() => {
     dispach(getProducts());
   }, [dispach]);
 
-  const result = products.find(({ category }) => category.name === "units");
-
+  const result =
+    products && products.find(({ category }) => category.name === "medicines");
   return (
     <>
        {isLoading ?
@@ -26,13 +28,12 @@ const Units = () => {
   : 
   <>
       <CategoryCard image={result.category.image} />
-
       <Container>
         <Grid container spacing={5}>
           {products &&
             products
               .filter((product) => {
-                return product.category.name === "units";
+                return product.category.name === "medicines";
               })
               .map((product, index) => {
                 return (
@@ -58,4 +59,4 @@ const Units = () => {
     </>
   );
 };
-export default Units;
+export default Medicines;
