@@ -15,10 +15,20 @@ const validationSchema = Yup.object({
     customerPassword: Yup.string().required('Please Enter your Password'),
     confirmPassword: Yup.string().required('Please confirm your Password'),
     // customerTotalPurchase: Yup.string().required('Please Enter your Purchase'),
-    customerAddresses: Yup.string().required('Please Enter your Address'),
+    //customerAddresses: Yup.string().required('Please Enter your Address'),
     //  Orders: Yup.string().required('Please Enter your Orders'),
     // myFavorite: Yup.string().required('Please Enter your favourite'),
     role: Yup.string().required('Please Enter your Role'),
+    customerCountry: Yup.string().required('Please Enter your Role'),
+    customerCity: Yup.string().required('Please Enter your Role'),
+    customerStreet: Yup.string().required('Please Enter your Role'),
+    customerBuilding: Yup.string().required('Please Enter your Role'),
+    customerFloor: Yup.string().required('Please Enter your Role'),
+    //  const [customerCountry, setCountry] = useState(null)
+    //  const [customerCity, setCity] = useState(null)
+    // const [customerStreet, setStreet] = useState(null)
+    // const [customerBuilding, setBuilding] = useState(null)
+    // const [customerFloor, setFloor] = useState(null)
 })
 
 const SignUP = () => {
@@ -34,14 +44,19 @@ const SignUP = () => {
             customerPassword: '',
             confirmPassword: '',
             customerTotalPurchase: '',
-            customerAddresses: '',
-            Orders: '',
-            cart: '',
-            myFavorite: '',
+            //    customerAddresses: '',
+            //     Orders: '',
+            //    cart: '',
+            //    myFavorite: '',
             role: '',
+            customerCountry: '',
+            customerCity: '',
+            customerStreet: '',
+            customerBuilding: '',
+            customerFloor: '',
         },
         onSubmit: values => {
-            console.log('asdasdd')
+            console.log(values)
             const userData = {
                 fullName: values.fullName,
                 customerPhone: values.customerPhone,
@@ -49,11 +64,17 @@ const SignUP = () => {
                 customerPassword: values.customerPassword,
                 confirmPassword: values.confirmPassword,
                 customerTotalPurchase: values.customerTotalPurchase,
-                customerAddresses: values.customerAddresses,
-                Orders: values.Orders,
-                cart: values.cart,
-                myFavorite: values.myFavorite,
                 role: values.role,
+                customerCountry: values.customerCountry,
+                customerCity: values.customerCity,
+                customerStreet: values.customerStreet,
+                customerBuilding: values.customerBuilding,
+                customerFloor: values.customerFloor,
+                //  customerAddresses: values.customerAddresses,
+                //  Orders: values.Orders,
+                //  cart: values.cart,
+                //   myFavorite: values.myFavorite,
+                //    role: values.role,
             }
             dispatch(register(userData))
 
@@ -85,12 +106,12 @@ const SignUP = () => {
     useEffect(() => {
         if (isError) {
             //  toast.error(message)
-           // return 'pleasesfle'
+            // return 'pleasesfle'
         }
         if (isSuccess || user) {
             navigate('/')
         }
-       dispatch(reset())
+        dispatch(reset())
     }, [user, isSuccess, isError, message, navigate, dispatch])
 
     /*
@@ -179,17 +200,51 @@ const SignUP = () => {
 
             <div className='d-flex align-items-center justify-content-evenly w-100'>
                 <label htmlFor="role"><i className="fa-solid border p-2 rounded-circle fa-user  " role="button"></i></label>
-                <input className='form-control w-75 ' type="text" placeholder='Enter Your Role' name='role'
-                    {...formik.getFieldProps('role')} />
+                <select className='form-select w-75 mb-1' name='role' value={formik.values.role}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur} >
+                    <option value="Doctor">Doctor</option>
+                    <option value="Merchant">Merchant</option>
+
+                </select>
+
             </div>
             {formik.touched.role && formik.errors.role ? <div className='errorForm'>{formik.errors.role}</div> : null}
 
             <div className='d-flex align-items-center justify-content-evenly w-100'>
-                <label htmlFor="customerAddresses"><i className="fa-solid fa-location-dot border rounded-circle p-2  " role="button"></i></label>
-                <input className='form-control w-75' type="text" placeholder='Enter Your Address' name='customerAddresses'
-                    {...formik.getFieldProps('customerAddresses')} />
+                <label htmlFor="customerCountry"><i className="fa-solid fa-location-dot border rounded-circle p-2  " role="button"></i></label>
+                <input className='form-control w-75' type="text" placeholder='Enter Your customerCountry' name='customerCountry'
+                    {...formik.getFieldProps('customerCountry')} />
             </div>
-            {formik.touched.customerAddresses && formik.errors.customerAddresses ? <div className='errorForm'>{formik.errors.customerAddresses}</div> : null}
+            {formik.touched.customerCountry && formik.errors.customerCountry ? <div className='errorForm'>{formik.errors.customerCountry}</div> : null}
+
+            <div className='d-flex align-items-center justify-content-evenly w-100'>
+                <label htmlFor="customerCity"><i className="fa-solid fa-location-dot border rounded-circle p-2  " role="button"></i></label>
+                <input className='form-control w-75' type="text" placeholder='Enter Your customerCity' name='customerCity'
+                    {...formik.getFieldProps('customerCity')} />
+            </div>
+            {formik.touched.customerCity && formik.errors.customerCity ? <div className='errorForm'>{formik.errors.customerCity}</div> : null}
+
+            <div className='d-flex align-items-center justify-content-evenly w-100'>
+                <label htmlFor="customerStreet"><i className="fa-solid fa-location-dot border rounded-circle p-2  " role="button"></i></label>
+                <input className='form-control w-75' type="text" placeholder='Enter Your customerStreet' name='customerStreet'
+                    {...formik.getFieldProps('customerStreet')} />
+            </div>
+            {formik.touched.customerStreet && formik.errors.customerStreet ? <div className='errorForm'>{formik.errors.customerStreet}</div> : null}
+
+            <div className='d-flex align-items-center justify-content-evenly w-100'>
+                <label htmlFor="customerBuilding"><i className="fa-solid fa-location-dot border rounded-circle p-2  " role="button"></i></label>
+                <input className='form-control w-75' type="text" placeholder='Enter Your customerBuilding' name='customerBuilding'
+                    {...formik.getFieldProps('customerBuilding')} />
+            </div>
+            {formik.touched.customerBuilding && formik.errors.customerBuilding ? <div className='errorForm'>{formik.errors.customerBuilding}</div> : null}
+
+            <div className='d-flex align-items-center justify-content-evenly w-100'>
+                <label htmlFor="customerFloor"><i className="fa-solid fa-location-dot border rounded-circle p-2  " role="button"></i></label>
+                <input className='form-control w-75' type="text" placeholder='Enter Your customerFloor' name='customerFloor'
+                    {...formik.getFieldProps('customerFloor')} />
+            </div>
+            {formik.touched.customerFloor && formik.errors.customerFloor ? <div className='errorForm'>{formik.errors.customerFloor}</div> : null}
 
             <button className='btnSubmit btn mt-3' type="submit">submit <i className="fa-solid fa-clipboard-list"></i></button>
         </form>

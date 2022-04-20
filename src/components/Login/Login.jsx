@@ -17,7 +17,7 @@ const Login = ({ handleChange }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { isLoading, user, isSuccess, isError, message } = useSelector((state) => state.auth)
-   
+
     /*
        const [formData, setFormData] = useState({
            email:'',
@@ -50,14 +50,14 @@ const Login = ({ handleChange }) => {
 
     useEffect(() => {
         if (isError) {
-         //   toast.error(message)
+            //   toast.error(message)
         }
         if (isSuccess || user) {
             dispatch(getFavourite(user._id))
-
+            dispatch(reset())
             navigate('/')
         }
-        dispatch(reset())
+
     }, [user, isSuccess, isError, message, navigate, dispatch])
     /*
         const onChange = (e) => {
@@ -77,7 +77,7 @@ const Login = ({ handleChange }) => {
               
         }
     */
- 
+
     return (<>
         <form className='continer p-5 mt-3 sign-in text-center' onSubmit={formik.handleSubmit}>
             <div className='d-flex align-items-center justify-content-center w-100 '>
@@ -92,10 +92,11 @@ const Login = ({ handleChange }) => {
                 <input placeholder='Passoword' className='form-control  ms-2'
                     type="password" name='password'
                     {...formik.getFieldProps('password')}
-                />         
+                />
             </div>
             {formik.touched.password && formik.errors.password ? <div className='error'>{formik.errors.password}</div> : null}
             <button className='btn btn-lg text-white my-3' type="submit">Login <i className="fa-solid fa-right-to-bracket"></i></button><br />
+            {isError && <span style={{ color: "red" }}>userName or password is inCorrect</span>}
         </form>
     </>);
 }
