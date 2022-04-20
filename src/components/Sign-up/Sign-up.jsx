@@ -57,26 +57,26 @@ const SignUP = () => {
         },
         onSubmit: values => {
             console.log(values)
-            const userData = {
-                fullName: values.fullName,
-                customerPhone: values.customerPhone,
-                customerEmail: values.customerEmail,
-                customerPassword: values.customerPassword,
-                confirmPassword: values.confirmPassword,
-                customerTotalPurchase: values.customerTotalPurchase,
-                role: values.role,
-                customerCountry: values.customerCountry,
-                customerCity: values.customerCity,
-                customerStreet: values.customerStreet,
-                customerBuilding: values.customerBuilding,
-                customerFloor: values.customerFloor,
-                //  customerAddresses: values.customerAddresses,
-                //  Orders: values.Orders,
-                //  cart: values.cart,
-                //   myFavorite: values.myFavorite,
-                //    role: values.role,
-            }
-            dispatch(register(userData))
+            let formData = new FormData();
+            formData.append('fullName', values.fullName)
+            formData.append('customerPhone', values.customerPhone)
+            formData.append('customerEmail', values.customerEmail)
+            formData.append('customerPassword', values.customerPassword)
+            formData.append('confirmPassword', values.confirmPassword,)
+            formData.append('role', values.role)
+            formData.append('image', " ")
+            formData.append('customerAddress',
+            JSON.stringify(
+                {
+                    country: values.customerCountry,
+                    city: values.customerCity,
+                    streetName: values.customerStreet,
+                    buildingNumber: values.customerBuilding,
+                    floorNumber: values.customerFloor,
+                }
+            ))
+            
+            dispatch(register(formData))
 
             if (isError) {
                 console.log("error mesage")
@@ -200,9 +200,11 @@ const SignUP = () => {
 
             <div className='d-flex align-items-center justify-content-evenly w-100'>
                 <label htmlFor="role"><i className="fa-solid border p-2 rounded-circle fa-user  " role="button"></i></label>
-                <select className='form-select w-75 mb-1' name='role' value={formik.values.role}
+                <select className='form-select w-75 mb-1' name='role' 
+                    value={formik.values.role}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur} >
+                    <option selected >Select Your Role</option>
                     <option value="Doctor">Doctor</option>
                     <option value="Merchant">Merchant</option>
 
