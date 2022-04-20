@@ -1,10 +1,12 @@
-import { CircularProgress } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/product/productSlice";
 import { getTotals } from "../../store/cart/cartSlice";
 import OfferCard from "../offersCard/offersCard";
+import ListSkelton from './../Skeleton/Skeleton';
+
+
 
 
 const ProductCard = () => {
@@ -23,10 +25,13 @@ const ProductCard = () => {
 
   return (
     <>
-     {isLoading ?
-    <div height="400px" style={{ display: 'flex',justifyContent: "center",alignItems: "center",margin:"auto"}}>
-  <CircularProgress />  loading...</div>
-  : 
+ {isLoading ?
+       <> 
+     
+    <ListSkelton listsToRender={8} />
+     
+  </> 
+  :  
   <>
       {products &&
         products.map((product, index) => (
