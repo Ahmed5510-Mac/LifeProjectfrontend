@@ -7,7 +7,9 @@ import {useEffect}from "react"
 import { toggle } from "../../store/receipts/receiptSlice";
 import { getUserInfo} from "../../store/receipts/receiptSlice"
 function DeliveryMethod() {
+  const user = useSelector((state)=>state.auth.user);
 
+  console.log(user);
   const dispatch = useDispatch()
 
 
@@ -25,20 +27,32 @@ function DeliveryMethod() {
         <div className="row">
           <div className="jumbotron border w-100 shadow p-3 mb-5 bg-white rounde text-capitalize col-sm-12">
             <div className="title d-flex justify-content-between">
-              <h5> DELIVERY METHOD</h5>
+             <h5 style={{color:"black",fontFamily:"tahoma"}}>{`${user.customer.role === 'Doctor'  ? 'Dr ' : 'Mr '}${user.customer.fullName} `}</h5>
+              {/* <h5> DELIVERY METHOD</h5> */}
               <button className="btn text-warning" onClick={()=>dispatch(toggle())}>modify</button>
-
             </div>
             <hr />
             <div className="container">
-              <h6>Door Delivery</h6>
               <p>
-                Delivered between Wednesday 20 Apr and Monday 25 Apr. for EGP
-                68.40
+               <span style={{fontWeight:"bold"}}>Country : </span>{user.customer.customerAddress.country}
+              </p>
+              <p>
+               <span style={{fontWeight:"bold"}}>PhoneNumber : </span>{user.customer.customerPhone}
+              </p>
+              <p>
+               <span style={{fontWeight:"bold"}}>City : </span>{user.customer.customerAddress.city}
+              </p>
+              <p>
+               <span style={{fontWeight:"bold"}}>StreetName : </span>{user.customer.customerAddress.streetName}
+              </p>
+              <p>
+               <span style={{fontWeight:"bold"}}>BuildingNumber : </span>{user.customer.customerAddress.buildingNumber}
+              </p>
+              <p>
+               <span style={{fontWeight:"bold"}}>FloorNumber : </span>{user.customer.customerAddress.floorNumber}
               </p>
               <div className="border border-bottom-0 rounded-2 p-2">
                 <p className=" border-bottom">SHIPMENT DETAILS</p>
-                <ShipmentDetails />
                 <ShipmentDetails />
                 <PriceDetails />
               </div>

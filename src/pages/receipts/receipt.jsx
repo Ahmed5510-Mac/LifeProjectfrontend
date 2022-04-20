@@ -11,6 +11,7 @@ import { getTotals } from '../../store/cart/cartSlice';
  function Receipt() {
       const receiptState = useSelector((state) => state.reciptSlice.value)
       const cart = useSelector((state) => state.cart);
+      const user = useSelector((state)=>state.auth.user);
       console.log(cart);
 
       const dispatch =useDispatch() 
