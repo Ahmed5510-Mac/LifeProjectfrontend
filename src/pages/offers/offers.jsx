@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -10,6 +9,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsInDiscount } from "../../store/offers/offersSlice";
 import { getTotals } from "../../store/cart/cartSlice";
+import { useEffect, useState } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -20,6 +20,16 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function SeeAllOffers() {
+  const [hours, sethours] = useState(1);
+  const [minutes, setminutes] = useState(60);
+  const [seconds, setSeconds] = useState(60);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((seconds) => seconds - 1);
+    }, 1000);
+    return ( () => clearInterval(interval));
+  }, []);
   const { oneDiscount, productsInDiscount } = useSelector(
     (state) => state.discounts
   );
@@ -30,12 +40,12 @@ export default function SeeAllOffers() {
   const { pathname } = useLocation();
   const cart = useSelector((state) => state.cart);
 
-  React.useEffect(() => {
+ useEffect(() => {
     dispatch(getProductsInDiscount(oneDiscount));
     dispatch(getTotals());
   }, [cart]);
   
-  React.useEffect(()=>{
+useEffect(()=>{
     window.scrollTo(0, 0);
   },[pathname])
 
@@ -63,7 +73,7 @@ export default function SeeAllOffers() {
   return (
     <Container sx={{ marginY: "5%" }}>
       <OffersContainer
-        offerTime={"Time Left: 08h : 36m : 50s"}
+        offerTime={`${hours} : ${minutes}:${seconds}`}
         containerColor="#e61601"
         textColor="white"
       />

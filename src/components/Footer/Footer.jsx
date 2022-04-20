@@ -1,22 +1,49 @@
 import img2 from "../../assets/img2.jpg";
-import styles from './footer.module.css'
+import styles from "./footer.module.css";
 
 const Footer = () => {
   return (
     <>
-      <div className={styles.footerbg} >
-        <footer className="container pt-5 sticky-bottom " >
+      <div className={styles.footerbg}>
+        <footer className="container pt-5 sticky-bottom ">
           <div className="row m-0 p-1">
-         
-            <div className="col-md-3 col-sm-12">
-                <div className="d-flex  align-items-center">
+            <div className="col-md-4 col-sm-12">
+              <div className="d-flex  align-items-center">
                 <img src={img2} alt="" className="rounded-circle" />
-              <h5 className="ms-3">LIFE</h5>
-                </div>
-              <ul className="nav flex-column mt-3" >
+                <h5 className="ms-3">LIFE</h5>
+              </div>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Officia sequi rem nostrum maxime tenetur! Ipsam autem
+                cupiditate, molestias eveniet, incidunt quaerat possimus ullam
+                assumenda modi similique ducimus voluptatibus voluptatum itaque?
+              </p>
+            </div>
+
+            <div className="col-md-2 col-sm-12 mt-5">
+              <h5>Support</h5>
+              <ul className="nav flex-column mt-3">
+                <li className="nav-item mb-2">Help Center</li>
+                <li className="nav-item mb-2">My Orders</li>
+                <li className="nav-item mb-2">Account Restore</li>
+                <li className="nav-item mb-2">Hire an Expert</li>
+              </ul>
+            </div>
+
+            <div className="col-md-3 col-sm-12 mt-5">
+              <h5>About MyOnlineStore</h5>
+              <ul className="nav flex-column mt-3">
+                <li className="nav-item mb-2">About us</li>
+                <li className="nav-item mb-2">Partners</li>
+                <li className="nav-item mb-2">Status page</li>
+              </ul>
+            </div>
+            <div className="col-md-3 col-sm-12 mt-5">
+              <h5>Contact US</h5>
+              <ul className="nav flex-column mt-3">
                 <li className="nav-item mb-2 ">
                   <a href="#/" className="nav-link p-0 link-light">
-                    <i className="fas fa-home mr-3" ></i> New York, NY 10012, US
+                    <i className="fas fa-home mr-3"></i> New York, NY 10012, US
                   </a>
                 </li>
                 <li className="nav-item mb-2">
@@ -35,83 +62,7 @@ const Footer = () => {
                     Street Cairo | Egypt
                   </a>
                 </li>
-               
               </ul>
-            </div>
-
-            <div className="col-md-3 col-sm-12 mt-5">
-              <h5>Support</h5>
-              <ul className="nav flex-column mt-3">
-                <li className="nav-item mb-2">
-                 
-                   Help Center
-                 
-                </li>
-                <li className="nav-item mb-2">
-                  
-                   My Orders
-                  
-                </li>
-                <li className="nav-item mb-2">
-                 
-                    Account Restore 
-                  
-                </li>
-                <li className="nav-item mb-2">
-                  
-                  Hire an Expert
-                  
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-md-6 col-sm-12 ">
-              <form>
-                <h4 className="footer_title text-center ">
-                  Contact Us
-                </h4>
-
-                <div className="d-flex form-group mb-2 gap-2">
-                  <input
-                    type="text"
-                    name="contact[fullname]"
-                    className="form-control"
-                    placeholder="Your name"
-                    required=""
-                  />
-                  <input
-                    type="text"
-                    name="contact[tel]"
-                    className="form-control"
-                    placeholder="Your Phone"
-                    required=""
-                  />
-                </div>
-                <div className="form-group mb-2">
-                  <input
-                    name="email"
-                    className="form-control"
-                    placeholder="Your email"
-                    pattern="[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}"
-                    required=""
-                  />
-                </div>
-                <div className="form-group mb-2">
-                  <textarea
-                    className="form-control"
-                    rows="3"
-                    name="message"
-                    placeholder="Message"
-                    required=""
-                    minLength="5"
-                  ></textarea>
-                </div>
-                <div className="form-group ">
-                  <button className="btn btn-primary w-100" type="button">
-                    Subscribe
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
 

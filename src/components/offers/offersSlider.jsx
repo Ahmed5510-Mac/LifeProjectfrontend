@@ -1,7 +1,6 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import * as React from "react";
 import LeftArrow from "../../assets/left-arrow.svg";
 import RightArrow from "../../assets/right-arrow.svg";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -12,17 +11,28 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setDiscountId } from "../../store/offers/offersSlice";
 import { getProducts } from "../../store/product/productSlice";
+import { useEffect, useState } from "react";
 
 const SliderComponent = ({ colorStyle, textColor, discountId }) => {
+  const [hours, sethours] = useState(1);
+  const [minutes, setminutes] = useState(60);
+  const [seconds, setSeconds] = useState(60);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((seconds) => seconds - 1);
+    }, 1000);
+    return ( () => clearInterval(seconds==0));
+  }, []);
+
   const { products } = useSelector((state) => state.products);
-  const [sliderProducts, setSliderProducts] = React.useState(null);
+  const [sliderProducts, setSliderProducts] = useState(null);
 
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-
 
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <div style={{ backgroundColor: "red" }}>
@@ -130,7 +140,7 @@ const SliderComponent = ({ colorStyle, textColor, discountId }) => {
                 color: textColor,
               }}
             >
-              Time Left: 08h : 36m : 50s{" "}
+              Time Left {hours} : {minutes}:{seconds}
             </div>
           </Grid>
           <Grid item xs={4}>
@@ -143,7 +153,7 @@ const SliderComponent = ({ colorStyle, textColor, discountId }) => {
             >
               <Link
                 onClick={() => dispatch(setDiscountId(discountId))}
-                style={{ color: `${textColor}` }}
+                style={{ color: `${textColor}`,containerColor:{colorStyle} }}
                 to="/offers"
               >
                 See All <ArrowForwardIosOutlinedIcon fontSize="3%" />{" "}

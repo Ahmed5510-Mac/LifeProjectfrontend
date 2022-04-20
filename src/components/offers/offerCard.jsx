@@ -20,7 +20,6 @@ export default function OffersCard({
 }) {
   let priceAfter = discountPersentatge !== 0 ?(priceBefore * discountPersentatge) / 100 :priceBefore;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
     // dispatch(selectProduct(productId));
     const onClick=()=>{
@@ -32,7 +31,7 @@ export default function OffersCard({
    }
 
   return (
-    <Card onClick={onClick}  className={styles.draft} sx={{ maxWidth: 300, maxHeight: 330, marginLeft: "2%" }}>
+    <Card onClick={onClick}  className={styles.draft} sx={{ maxWidth: 300, maxHeight: 330, marginLeft: "2%" }} >
   
         <CardMedia 
           sx={{
