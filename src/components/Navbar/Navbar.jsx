@@ -10,8 +10,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { reset, logout } from "../../store/auth/authSlice";
 import { getProducts } from "../../store/product/productSlice";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import SearchBar from "../searchBar/searchBar";
 import "./Navbar.css";
 
@@ -175,9 +173,9 @@ export default function Navbar() {
                       <NavLink
                         className="nav-link p-lg-3 active"
                         aria-current="page"
-                        to="/drugs"
+                        to="/medicines"
                       >
-                        Drugs
+                        Medicines
                       </NavLink>
                     </li>
                   </ul>

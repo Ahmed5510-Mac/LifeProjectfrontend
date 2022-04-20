@@ -12,7 +12,6 @@ import Footer from './components/Footer/Footer';
 import Contact from './pages/Contact/Contact.jsx';
 import Cart from './pages/Cart/Cart';
 import About from './pages/About/About';
-import { ToastContainer } from 'react-toastify';
 import Deatails2 from './pages/details/details';
 import SeeAllOffers from './pages/offers/offers';
 import Product from './pages/product/product';
@@ -20,7 +19,7 @@ import ProductDetails from './pages/details/productDetails';
 import Favourite from './pages/favourite/favourite';
 import Tools from './components/category/tools/tools';
 import Units from './components/category/units/units';
-// import Drugs from './components/category/drugs/drugs';
+import Medicines from './components/category/medicines/medicines';
 import News from './components/category/news/news';
 import Other from './components/category/other/other';
 import SearchResult from './pages/SearchResult/searchResult';
@@ -46,7 +45,7 @@ const App = () => {
             <Route path='/searchResult' element={<SearchResult/>}/>
             <Route path='/tools' element={<Tools />} />
             <Route path='/units' element={<Units />} />
-            {/* <Route path='/drugs' element={<Drugs />} /> */}
+            <Route path='/medicines' element={<Medicines />} />
             <Route path='/news' element={<News />} />
             <Route path='/others' element={<Other />} />
             <Route path='/product/:id' element={<ProductDetails />} />
