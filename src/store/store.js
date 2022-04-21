@@ -8,6 +8,7 @@ import authProductSlice from './cart/authProductCart'
 import authProductCart from './cart/authProductCart';
 import categorySlice from './category/categorySlice';
 import reciptSlice from "./receipts/receiptSlice"
+import userSlice  from './user/userSlice';
 
 
 export const store = configureStore({
@@ -17,6 +18,8 @@ export const store = configureStore({
     auth:authReducer,
     favourite:favouriteSlice,
     discounts: discountSlice,
+    customer:userSlice,
+
     // auth:authProductCart,
     categories: categorySlice,
     reciptSlice

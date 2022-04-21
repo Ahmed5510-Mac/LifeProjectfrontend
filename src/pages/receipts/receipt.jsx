@@ -5,32 +5,98 @@ import "./recepts.css"
 import PriceDetails from '../../components/rceipts/price-details'
 import DeliveryMethod from '../../components/rceipts/DeliveryMethod'
 import { useNavigate } from 'react-router-dom';
- import { useDispatch, useSelector } from 'react-redux';
-import {toggle} from "../../store/receipts/receiptSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggle } from "../../store/receipts/receiptSlice";
 import { getTotals } from '../../store/cart/cartSlice';
- function Receipt() {
-      const receiptState = useSelector((state) => state.reciptSlice.value)
-      const cart = useSelector((state) => state.cart);
-      const user = useSelector((state)=>state.auth.user);
-      console.log(cart);
+import { editCustomer } from '../../store/user/userSlice';
+import Spinner from '../../components/Spinner/Spinner';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-      const dispatch =useDispatch() 
-      useEffect(() => {
+
+const validationSchema = Yup.object({
+    fullName: Yup.string().required('Please Enter your Fullname'),
+    customerPhone: Yup.string().required('Please Enter your Phone'),
+    customerEmail: Yup.string().required('Please Enter your Email').email('Invalid email format'),
+    role: Yup.string().required('Please Enter your Role'),
+    customerCountry: Yup.string().required('Please Enter your Role'),
+    customerCity: Yup.string().required('Please Enter your Role'),
+    customerStreet: Yup.string().required('Please Enter your Role'),
+    customerBuilding: Yup.string().required('Please Enter your Role'),
+    customerFloor: Yup.string().required('Please Enter your Role'),
+})
+
+
+function Receipt() {
+    const receiptState = useSelector((state) => state.reciptSlice.value)
+    const cart = useSelector((state) => state.cart);
+    const { user, isSuccess, isError, isLoading } = useSelector((state) => state.auth);
+    console.log(cart);
+
+    const dispatch = useDispatch()
+    useEffect(() => {
         dispatch(getTotals());
-      }, [cart]);
+    }, [cart]);
 
 
 
-      const orderCard=cart.cartItems.map((item,index)=>{
-          return(<>
-           <Orderes
+    const orderCard = cart.cartItems.map((item, index) => {
+        return (<>
+            <Orderes
 
-        product={item}
-        />
-          </>)
-   });
+                product={item}
+            />
+        </>)
+    });
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
+    const formik = useFormik({
+        initialValues: {
+            fullName: user.customer.fullName,
+            customerPhone: user.customer.customerPhone,
+            customerEmail: user.customer.customerEmail,
+            role: user.customer.role,
+            image: user.customer.image,
+            customerCountry: user.customer.customerAddress.country,
+            customerCity: user.customer.customerAddress.city,
+            customerStreet: user.customer.customerAddress.streetName,
+            customerBuilding: user.customer.customerAddress.buildingNumber,
+            customerFloor: user.customer.customerAddress.floorNumber,
+        },
+        onSubmit: values => {
+            console.log(values)
+            let formData = new FormData();
+            formData.append('fullName', values.fullName)
+            formData.append('customerPhone', values.customerPhone)
+            formData.append('customerEmail', values.customerEmail)
+            formData.append('role', values.role)
+            formData.append('image', values.image)
+            formData.append('customerAddress',
+                JSON.stringify(
+                    {
+                        country: values.customerCountry,
+                        city: values.customerCity,
+                        streetName: values.customerStreet,
+                        buildingNumber: values.customerBuilding,
+                        floorNumber: values.customerFloor,
+                    }
+                ))
+
+            dispatch(editCustomer({formData,id:user.customer._id}))
+
+            if (isError) {
+                console.log("error mesage")
+            }
+            if (isSuccess || user) {
+                navigate('/')
+            }
+        },
+        validationSchema,
+    })
+    if (isLoading) {
+        return <Spinner />
+    }
+
     return (
         <Container sx={{ marginY: "5%" }}>
             
@@ -45,53 +111,70 @@ import { getTotals } from '../../store/cart/cartSlice';
                                 <div className="product-details   mb-1 pb-2">
 
                                     <div className="container">  
-                                        
-                                        <form onSubmit={(e) => e.preventDefault()}>
+                                   
+                                    <form onSubmit={formik.handleSubmit}>
                                             {/* ------------nameinput-------------- */}
                                             <div className="name d-flex form-recipts justify-content-between">
-                                                <div className="mb-3 divinput col-sm-12 col-md-5  ">
-                                                    <label htmlFor="exampleInputfname" className="form-label"> First Name</label>
-                                                    <input type="text" className="form-control" id="exampleInputfname" aria-describedby="emailHelp" />
+                                                <div className="mb-3 col-sm-12 col-md-12">
+                                                    <label htmlFor="fullName" className="form-label">Customer Name</label>
+                                                    <input className='form-control' placeholder='Enter Your fullname' type="text" name='fullName'
+                                                        {...formik.getFieldProps('fullName')} />
                                                 </div>
-                                                <div className="mb-3 divinput col-sm-12 col-md-5 ">
-                                                    <label htmlFor="exampleInputlname" className="form-label">Last Name</label>
-                                                    <input type="taxt" className="form-control " id="exampleInputlname" />
-                                                </div>
+                                                {formik.touched.fullName && formik.errors.fullName ? <div className='errorForm'>{formik.errors.fullName}</div> : null}
                                             </div>
                                             {/* mobil input */}
                                             <div className="mb-3 col-sm-12 col-md-12 ">
-                                                <label htmlFor="exampleInputmphone" className="form-label">mobile number</label>
-                                                <input type="number" className="form-control " id="exampleInputmphone" />
+                                                <label htmlFor="customerPhone" className="form-label">Phone Number</label>
+                                                <input className='form-control' type="text" placeholder='Enter Your Phonenumber' name='customerPhone'
+                                                    {...formik.getFieldProps('customerPhone')} />
+                                                {formik.touched.customerPhone && formik.errors.customerPhone ? <div className='errorForm'>{formik.errors.customerPhone}</div> : null}
                                             </div>
+
+
                                             {/* -----------------addredss--------------------- */}
-                                            <div className="form-group mb-3">
-                                                <label htmlFor="exampleFormControlTextarea1">street-name/ building number/ flat number</label>
-                                                <textarea className="form-control" placeholder='address' id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <div className="name d-flex form-recipts justify-content-between">
+                                                <div className="mb-3 divinput col-sm-12 col-md-5  ">
+                                                    <label htmlFor="customerCountry" className="form-label"> Country</label>
+                                                    <input type="text" className="form-control" name='customerCountry'
+                                                        {...formik.getFieldProps('customerCountry')} />
+                                        {formik.touched.customerCountry && formik.errors.customerCountry ? <div className='errorForm'>{formik.errors.customerCountry}</div> : null}
+                                                </div>
+                                               
+                                                <div className="mb-3 divinput col-sm-12 col-md-5 ">
+                                                    <label htmlFor="customerCity" className="form-label">City</label>
+                                                    <input type="taxt" className="form-control " id="exampleInputlname" name="customerCity"
+                                                    {...formik.getFieldProps('customerCity')}
+                                                    />
+                                        {formik.touched.customerCity && formik.errors.customerCity ? <div className='errorForm'>{formik.errors.customerCity}</div> : null}
+                                                </div>
                                             </div>
-                                            {/* -----------------Governorate--------------------- */}
-                                            <div className="form-group my-2">
-                                                <label htmlFor="exampleFormControlGovernorate"> choose Governorate </label>
-                                                <select className="form-control" id="exampleFormControlGovernorate">
-                                                    <option>kaf elshikh</option>
-                                                    <option>cairo</option>
-                                                    <option>alex</option>
-                                                    <option>banha</option>
-                                                    <option>dakhlia</option>
-                                                </select>
+                                            <div className="name d-flex form-recipts justify-content-between">
+                                                <div className="mb-3 divinput col-sm-12 col-md-5  ">
+                                                    <label htmlFor="customerStreet" className="form-label"> Street</label>
+                                                    <input type="text" className="form-control" name='customerStreet'
+                                                        {...formik.getFieldProps('customerStreet')} />
+                                        {formik.touched.customerStreet && formik.errors.customerStreet ? <div className='errorForm'>{formik.errors.customerStreet}</div> : null}
+                                                </div>
+                                               
+                                                <div className="mb-3 divinput col-sm-12 col-md-5 ">
+                                                    <label htmlFor="customerBuilding" className="form-label">Building Number</label>
+                                                    <input type="taxt" className="form-control " id="exampleInputlname" name="customerBuilding"
+                                                    {...formik.getFieldProps('customerBuilding')}
+                                                    />
+                                        {formik.touched.customerBuilding && formik.errors.customerBuilding ? <div className='errorForm'>{formik.errors.customerBuilding}</div> : null}
+                                                </div>
                                             </div>
-                                            {/* -----------------city--------------------- */}
-                                            <div className="form-group mb-3">
-                                                <label htmlFor="exampleFormControlcity"> choose city </label>
-                                                <select className="form-control" id="exampleFormControlcity">
-                                                    <option>kaf elshikh</option>
-                                                    <option>cairo</option>
-                                                    <option>alex</option>
-                                                    <option>banha</option>
-                                                    <option>dakhlia</option>
-                                                </select>
+                                            <div className="name d-flex form-recipts justify-content-between">
+                                                <div className="mb-3 divinput col-sm-12 col-md-5  ">
+                                                    <label htmlFor="customerFloor" className="form-label"> Floor Number</label>
+                                                    <input type="text" className="form-control" name='customerFloor'
+                                                        {...formik.getFieldProps('customerFloor')} />
+                                        {formik.touched.customerFloor && formik.errors.customerFloor ? <div className='errorForm'>{formik.errors.customerFloor}</div> : null}
+                                                </div>
+                                               
                                             </div>
-                                        
-                                            <button type="submit" className="btn font-weight-bold-1 w-100 mb-3" onClick={() => dispatch(toggle())}>Save and continue</button>
+
+                                            <button type="submit" className="btn font-weight-bold-1 w-100 mb-3">Save and continue</button>
                                         </form>
                                 
                                     </div>
