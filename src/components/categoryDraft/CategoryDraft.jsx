@@ -1,4 +1,7 @@
-import img from "../../assets/img03.jpg";
+import img1 from "../../assets/dental1.jpg";
+import img2 from "../../assets/dental2.jpg";
+import img3 from "../../assets/dental5.jpg";
+import img4 from "../../assets/dental4.jpg";
 import styles from './categoryDraft.module.css'
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -19,20 +22,102 @@ const CategoryDraft = () => {
 
 
   return (
-    <>
 
-      <Grid container spacing={1}>
+    <>
+      <div className="container conparentdreaft">
+          <div className="row  ">
+          <div className="col-md-6">
+                  <div className={styles.parent}>
+                    <div className={styles.grow}>
+                      <div className={styles.pimage} >
+                        <img src={img1} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                        <div className={styles.movingdiv}>
+                          <h4 className={styles.textcatcard}>This is  You Can See more Product By Clicking Here
+                            <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
+                          </h4>
+                          <button className={styles.btncat} variant="contained" onClick={() =>
+                            navigate(`/`)}>View All	&#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+          <div className="col-md-6">
+         
+            <div className={`${styles.parent} ${styles.parentmedia}`}>
+                    <div className={styles.grow}>
+                      <div className={styles.pimage} >
+                        <img src={img2} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                        <div className={styles.movingdiv}>
+                          <h4 className={styles.textcatcard}>This is  You Can See more Product By Clicking Here
+                            <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
+                          </h4>
+                          <button className={styles.btncat} variant="contained" onClick={() =>
+                            navigate(`/`)}>View All	&#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+                            
+          <div className="container">
+          <div className=" row mt-4">
+              <div className="col-md-8">
+                    <div className={styles.parent}>
+                      <div className={styles.grow}>
+                        <div className={styles.pimage} >
+                          <img src={img3} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <div className={styles.movingdiv}>
+                            <h4 className={styles.textcatcard}>This is  You Can See more Product By Clicking Here
+                              <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
+                            </h4>
+                            <button className={styles.btncat} variant="contained" onClick={() =>
+                              navigate(`/`)}>View All	&#8594;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            <div className="col-md-4">
+                    <div className={styles.parent}>
+                      <div className={styles.grow}>
+                        <div className={styles.pimage} >
+                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <div className={styles.movingdiv}>
+                            <h4 className={styles.textcatcard}>This is  You Can See more Product By Clicking Here
+                              <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
+                            </h4>
+                            <button className={styles.btncat} variant="contained" onClick={() =>
+                              navigate(`/`)}>View All	&#8594;</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            </div>
+            
+        </div>
+
+          
+      
+          </div>
+       </div>
+      
+
+
+      {/*       
+      <Grid container spacing={-12}>
         {categories && categories.map((item) => (
           <Grid
             item
             xs={6}
+            
           >
             <div className={styles.parent}>
               <div className={styles.grow}>
                 <div className={styles.pimage} >
                   <img
                     src={`${item.image}?w=248&fit=crop&auto=format`}
-                    // srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.name}
                     loading="lazy"
                     width="500px"
@@ -46,8 +131,6 @@ const CategoryDraft = () => {
                       navigate(`/${item.name}`)}>View All	&#8594;</button>
 
                   </div>
-
-
                 </div>
 
 
@@ -56,19 +139,11 @@ const CategoryDraft = () => {
             </div>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
 
 
 
-      {/* <Box
-                      sx={{
-                        backgroundColor: "primary.dark",
-                        "&:hover": {
-                          backgroundColor: "primary.main",
-                          opacity: [0.9, 0.8, 0.7],
-                        },
-                      }}
-                    > </Box> */}
+
 
 
 
