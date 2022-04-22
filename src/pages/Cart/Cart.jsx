@@ -3,7 +3,7 @@ import { Box, styled } from "@mui/system";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import {getUsers} from  '../../store/auth/authSlice';
 import {
   getTotals,
   addToCart,
@@ -25,6 +25,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getTotals());
+    dispatch(getUsers(user.customer._id))
   }, [cart, dispatch]);
 
 
@@ -41,6 +42,17 @@ const Cart = () => {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
+  const handleCheckout = ()=>{
+    if(user)
+    {
+      dispatch(getUsers(user.customer._id))
+      navigate('/receipts')
+      
+    }else{
+      navigate('/register')
+    }
+  }
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -181,9 +193,9 @@ const Cart = () => {
                     <hr className="d-md-block d-none" />
                     <div className="tootal d-flex justify-content-between h-50 flex-sm-column">
                       <p className="d-none d-md-block"> subtootal</p>
-                      <h4 className="d-md-block d-none ">{`EGP ${cart.cartTotalAmount}`}</h4>
+                      <h4 className="d-md-block d-none">{`EGP ${cart.cartTotalAmount}`}</h4>
                     </div>
-                    <button onClick={()=>user?navigate('/receipts'):navigate('/register')} className="btn btn-primary w-100 ">
+                    <button onClick={()=>handleCheckout()} className="btn btn-primary w-100 ">
                     {`Checkout EGP ${cart.cartTotalAmount}`}
                        
                     </button>

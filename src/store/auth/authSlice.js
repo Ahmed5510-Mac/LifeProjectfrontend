@@ -102,10 +102,10 @@ export const deleteFavourite = createAsyncThunk(
 
 export const getUsers = createAsyncThunk(
   "auth/getUsers",
-  async (_, thunkAPI) => {
+  async (id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await axios.get("http://localhost:8080/customer");
+      const res = await axios.get(`http://localhost:8080/customer/${id}`);
       return res.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -295,6 +295,10 @@ export const authSlice = createSlice({
     [getUsers.fulfilled]: (state, action) => {
       console.log(action);
       state.isLoading = false;
+      const newUser = action.payload;
+      const userEdit = JSON.parse(localStorage.getItem("user"))
+      userEdit.customer = newUser
+      localStorage.setItem("user",JSON.stringify(userEdit)) 
       state.products = action.payload;
     },
     [getUsers.rejected]: (state, action) => {

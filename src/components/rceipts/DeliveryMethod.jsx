@@ -6,18 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useEffect}from "react"
 import { toggle } from "../../store/receipts/receiptSlice";
 import { getUserInfo} from "../../store/receipts/receiptSlice"
+import {insertOrder} from "../../store/orders/ordersSlice"
 function DeliveryMethod() {
   const user = useSelector((state)=>state.auth.user);
-
+  const cart = useSelector((state) => state.cart)
   console.log(user);
   const dispatch = useDispatch()
-
 
   useEffect(() => {
     dispatch(getUserInfo());
   }, [dispatch]);
   
-  console.log(dispatch)
 
      
     
@@ -60,6 +59,7 @@ function DeliveryMethod() {
               <button
                 type="submit"
                 className="btn font-weight-bold-1 w-100 mb-3"
+                 onClick={()=>{dispatch(insertOrder({cart,id:user.customer._id}));}}
               >
                 Confirm Order
               </button>

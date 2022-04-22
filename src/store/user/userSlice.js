@@ -21,19 +21,18 @@ export const insertCustomer = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     // const config = {headers:{'content-type':'multipart/form-data'}}
     // axios.post('http://localhost:8080/customer',customertData,config);
-     try {
-      const res = await fetch('http://localhost:8080/customer',{
-        method:'POST',
-        body:customerData,
-            }) 
+    try {
+      const res = await fetch('http://localhost:8080/customer', {
+        method: 'POST',
+        body: customerData,
+      })
       console.log(res)
-      return res;
+      return res.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-
 export const deleteCustomer = createAsyncThunk(
   'customer/deleteCustomer',
   async (_id, thunkAPI) => {
@@ -47,17 +46,18 @@ export const deleteCustomer = createAsyncThunk(
     }
   }
 );
+
 export const editCustomer = createAsyncThunk(
   'customer/editCustomer',
   async (customerData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
       console.log(customerData.id)
-      const res = await axios.put(`http://localhost:8080/customer/${customerData.id}`, 
-      customerData.formData
+      const res = await axios.put(`http://localhost:8080/customer/${customerData.id}`,
+        customerData.formData
       );
-      console.log(res.data.data)
-      return res.data.data;
+      console.log(res.data)
+      return res.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -101,7 +101,7 @@ export const userSlice = createSlice({
       console.log(action.payload)
       console.log(state.customers)
       state.isLoading = false;
-      state.customers.push(action.payload);
+      state.customers=action.payload;
     },
     [insertCustomer.rejected]: (state, action) => {
       state.isLoading = false;
@@ -136,8 +136,10 @@ state.error = null;
 },
 [editCustomer.fulfilled]: (state, action) => {
   console.log(action.payload);
-  // localStorage.setItem("user",JSON.stringify(action.payload))
-state.isLoading = false;
+  const oldUser = JSON.parse(localStorage.getItem("user"))
+  oldUser.customer = action.payload.customer
+  localStorage.setItem("user", JSON.stringify(oldUser))
+  state.isLoading = false;
 },
 [editCustomer.rejected]: (state, action) => {
   console.log(action.payload);
