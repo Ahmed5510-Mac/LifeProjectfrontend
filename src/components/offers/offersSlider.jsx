@@ -11,19 +11,39 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setDiscountId } from "../../store/offers/offersSlice";
 import { getProducts } from "../../store/product/productSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SliderComponent = ({ colorStyle, textColor, discountId }) => {
-  const [hours, sethours] = useState(1);
-  const [minutes, setminutes] = useState(60);
-  const [seconds, setSeconds] = useState(60);
-
+  const [timerday, settimerday] = useState("00");
+  const [timerhours, settimerhours] = useState("00");
+  const [timerminutes, settimerminutes] = useState("00");
+  const [timerseconds, settimerSeconds] = useState("00");
+let interval=useRef();
+const countDown =()=>{
+const countDate=new Date('may 1,2022 00:00:00').getTime();
+interval=setInterval(() => {
+  const now=new Date().getTime();
+  const discounter=countDate-now;
+  const days=Math.floor(discounter/(1000*60*60*24));
+  const hours=Math.floor((discounter%(1000*60*60*24)/(1000*60*60)));
+  const minutes=Math.floor((discounter%(1000*60*60)/(1000*60)))
+  const seconds=Math.floor((discounter%(1000*60)/(1000)))
+  if(discounter<0){
+    clearInterval(interval.current)
+  }else{
+    settimerday(days);
+    settimerhours(hours);
+    settimerminutes(minutes);
+    settimerSeconds(seconds);
+  }
+}, 1000);
+} 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds - 1);
-    }, 1000);
-    return ( () => clearInterval(seconds==0));
-  }, []);
+    countDown();
+    return()=>{
+    clearInterval(interval.current)
+    }
+  });
 
   const { products } = useSelector((state) => state.products);
   const [sliderProducts, setSliderProducts] = useState(null);
@@ -140,7 +160,7 @@ const SliderComponent = ({ colorStyle, textColor, discountId }) => {
                 color: textColor,
               }}
             >
-              Time Left {hours} : {minutes}:{seconds}
+              Time Left {timerday}d : {timerhours}h:{timerminutes}m:{timerseconds}s
             </div>
           </Grid>
           <Grid item xs={4}>

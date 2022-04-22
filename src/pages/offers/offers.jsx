@@ -1,40 +1,49 @@
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import OfferCard from "../../components/offersCard/offersCard";
 import OffersContainer from "../../components/offersContainer/offersContainer";
 import { Container } from "@mui/material";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsInDiscount } from "../../store/offers/offersSlice";
 import { getTotals } from "../../store/cart/cartSlice";
-import { useEffect, useState } from "react";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import { useEffect, useRef, useState } from "react";
 
 export default function SeeAllOffers() {
-  const [hours, sethours] = useState(1);
-  const [minutes, setminutes] = useState(60);
-  const [seconds, setSeconds] = useState(60);
-
+  const [timerday, settimerday] = useState("00");
+  const [timerhours, settimerhours] = useState("00");
+  const [timerminutes, settimerminutes] = useState("00");
+  const [timerseconds, settimerSeconds] = useState("00");
+let interval=useRef();
+const countDown =()=>{
+const countDate=new Date('may 1,2022 00:00:00').getTime();
+interval=setInterval(() => {
+  const now=new Date().getTime();
+  const discounter=countDate-now;
+  const days=Math.floor(discounter/(1000*60*60*24));
+  const hours=Math.floor((discounter%(1000*60*60*24)/(1000*60*60)));
+  const minutes=Math.floor((discounter%(1000*60*60)/(1000*60)))
+  const seconds=Math.floor((discounter%(1000*60)/(1000)))
+  if(discounter<0){
+    clearInterval(interval.current)
+  }else{
+    settimerday(days);
+    settimerhours(hours);
+    settimerminutes(minutes);
+    settimerSeconds(seconds);
+  }
+}, 1000);
+} 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds - 1);
-    }, 1000);
-    return ( () => clearInterval(interval));
-  }, []);
+    countDown();
+    return()=>{
+    clearInterval(interval.current)
+    }
+  });
   const { oneDiscount, productsInDiscount } = useSelector(
     (state) => state.discounts
   );
   const dispatch = useDispatch();
-  const navigate =useNavigate();
 
 
   const { pathname } = useLocation();
@@ -73,7 +82,7 @@ useEffect(()=>{
   return (
     <Container sx={{ marginY: "5%" }}>
       <OffersContainer
-        offerTime={`${hours} : ${minutes}:${seconds}`}
+        offerTime={` Time Left ${timerday}d : ${timerhours}h:${timerminutes}m:${timerseconds}s`}
         containerColor="#e61601"
         textColor="white"
       />
