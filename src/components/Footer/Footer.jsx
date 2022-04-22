@@ -1,5 +1,6 @@
 import img2 from "../../assets/img2.jpg";
 import styles from "./footer.module.css";
+import logo from "../../assets/Logo1.png";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
           <div className="row m-0 p-1">
             <div className="col-md-4 col-sm-12">
               <div className="d-flex  align-items-center">
-                <img src={img2} alt="" className="rounded-circle" />
+              <img className="w-25  " src={logo} alt="" />
                 <h5 className="ms-3">LIFE</h5>
               </div>
               <p>

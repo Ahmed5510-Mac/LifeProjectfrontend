@@ -25,8 +25,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
-
-  //  const [className, setclassName] = useState('nav-transparent');
+  const currentUser = JSON.parse(localStorage.getItem('user'))
 
   window.onscroll = function () {
     let myNav = document.getElementById("navBar");
@@ -46,39 +45,51 @@ export default function Navbar() {
 
   return (
     <nav
-      className="navbar  container-col-md fixed-top navbar-expand-lg"
+      className="navbar  container-col-md fixed-top navbar-expand-lg "
       id="navBar"
     >
       <div className="container-fluid  position-relative">
 
-        <NavLink className="Cnavbar-brand" to="/">
-          <img className="w-50 d-sm-w-25" src={logo} alt="" />
+        <NavLink className="Cnavbar-brand d-flex align-items-center " to="/">
+          <img className="w-50 d-sm-w-25 " src={logo} alt="" />
+          <p className=" strock mt-3 fs-3">LIFE</p>
         </NavLink>
         {/* ----------- */}
 
         {/* =====element will visable in mobile screen===== */}
-        <div className="iconmobile d-flex flex-row-reverse">
+       
+        <div className="iconmobile d-flex flex-row-reverse ">
         {user ? (
-              <button className="btn logout-mob ms-2 d-lg-none  rounded-circle bg-white" onClick={onLogout}>
-                <i className="fa-solid fa-arrow-right-from-bracket  "></i>
+              <button className="btn logout-mob ms-2 d-lg-none  " onClick={onLogout}>
+                <i className="fa-solid fa-arrow-right-from-bracket text-white strock"></i>
               </button>
             ) : (
               <></>
             )}
           {/* -------- */}
-          <NavLink to="/cart" className="btn mx-2  d-lg-none  rounded-circle bg-white">
+          <NavLink to="/cart" className="btn mx-2  d-lg-none ">
             {" "}
-            <span className="fa-solid fa-cart-shopping text-dark position-relative">
+            <span className="fa-solid fa-cart-shopping text-dark position-relative text-white">
               <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
-                {counter}
+              {cart.cartTotalQuantity}
               </span>
             </span>{" "}
           </NavLink>
 
-          <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
-            {" "}
-            <span className="fa-solid fa-user text-dark"></span>{" "}
-          </NavLink>
+          
+          <div className="userNavbar align-items-sm-center  ">
+               {currentUser?
+              <NavLink to="/register" className="btn  d-lg-none text-white">
+                  <i class="fa-solid fa-1x-user fa-user-check strock "></i> 
+                </NavLink> :
+                
+              <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
+                  <span className="fa-solid fa-user strock text-dark"> </span>
+                </NavLink>
+              
+              }
+                <p className=" loguserName text-white d-none">  {currentUser &&"Hello! "+currentUser.customer.fullName} </p>
+            </div>
 
           <div
             className="  d-lg-none   "
@@ -206,13 +217,22 @@ export default function Navbar() {
             </li>
           </ul>
           <div className="iconLscreen d-flex">
-            <NavLink to="/register" className="btn  d-none  d-lg-block rounded-circle bg-white">
+            <div className="userNavbar">
+               {currentUser?
+              <NavLink to="/register" className="btn  d-none  d-lg-block text-white">
+                  <i class="fa-solid fa-1x-user fa-user-check strock "></i> 
+                </NavLink> :
+                
+              <NavLink to="/register" className="btn  d-none  d-lg-block rounded-circle bg-white">
+                  <span className="fa-solid fa-user strock text-dark"> </span>
+                </NavLink>
+              
+              }
+                <p className=" loguserName text-white strock">  {currentUser &&"Hello! "+currentUser.customer.fullName} </p>
+            </div>
+            <NavLink to="/cart" className="btn mx-2  d-none d-lg-block d-flex align-items-center rounded-circle ">
               {" "}
-              <span className="fa-solid fa-user text-dark"></span>{" "}
-            </NavLink>
-            <NavLink to="/cart" className="btn mx-2  d-none d-lg-block rounded-circle bg-white">
-              {" "}
-              <span className="fa-solid fa-cart-shopping text-dark position-relative">
+              <span className="fa-solid fa-cart-shopping text-white position-relative strock">
                 <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
                 {cart.cartTotalQuantity}
                 </span>
@@ -220,8 +240,8 @@ export default function Navbar() {
             </NavLink>
 
             {user ? (
-              <button className="btn logout-lg ms-2  d-md-none d-lg-block rounded-circle bg-white" onClick={onLogout}>
-                <i className="fa-solid fa-arrow-right-from-bracket  "></i>
+              <button className=" logout-lg ms-2  d-md-none d-lg-block  " onClick={onLogout}>
+                <i className="fa-solid fa-arrow-right-from-bracket text-white strock"></i>
               </button>
             ) : (
               <></>

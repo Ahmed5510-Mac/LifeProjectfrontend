@@ -21,38 +21,38 @@ const CategoryDraft = () => {
   return (
     <>
 
-      <Grid  container  spacing={1}>
+      <Grid container spacing={1}>
         {categories && categories.map((item) => (
           <Grid
             item
             xs={6}
           >
             <div className={styles.parent}>
-            <div className={styles.grow}>
-              <div className={styles.pimage} >
-                <img
-                  src={`${item.image}?w=248&fit=crop&auto=format`}
-                  // srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.name}
-                  loading="lazy"
-                  width="500px"
-                  height="400px"
-                />
+              <div className={styles.grow}>
+                <div className={styles.pimage} >
+                  <img
+                    src={`${item.image}?w=248&fit=crop&auto=format`}
+                    // srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.name}
+                    loading="lazy"
+                    width="500px"
+                    height="400px"
+                  />
                   <div className={styles.movingdiv}>
                     <h4 className={styles.textcatcard}>This is {item.name} You Can See more Product By Clicking Here
-                    <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
+                      <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
                     </h4>
-                    <button className={styles.btncat}  variant="contained" onClick={() =>
+                    <button className={styles.btncat} variant="contained" onClick={() =>
                       navigate(`/${item.name}`)}>View All	&#8594;</button>
 
                   </div>
-               
+
+
+                </div>
+
+
 
               </div>
-
-
-
-            </div>
             </div>
           </Grid>
         ))}

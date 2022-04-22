@@ -15,12 +15,12 @@ const Favourite = () => {
 
   console.log(user);
 
-  // useEffect(() => {
-  //   window.scroll(0, 0);
-  //   if (user) {
-  //     dispatch(getFavourite(user.customer._id));
-  //   }
-  // }, []);
+  useEffect(() => {
+    window.scroll(0, 0);
+    if (user) {
+      dispatch(getFavourite(user.customer._id));
+    }
+  }, []);
 
   if (user && myfavourites.length != 0) {
     favoriteCard =

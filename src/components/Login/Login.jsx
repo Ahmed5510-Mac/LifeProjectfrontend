@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getFavourite, login, reset } from './../../store/auth/authSlice';
 import "./login.css"
+import Swal from "sweetalert2";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -40,7 +41,10 @@ const Login = ({ handleChange }) => {
                 console.log("error mesage")
             }
             if (isSuccess || user) {
-                navigate('/')
+
+                    navigate('/')
+               
+                
             }
             //  dispatch(reset())
         },
@@ -53,9 +57,29 @@ const Login = ({ handleChange }) => {
             //   toast.error(message)
         }
         if (isSuccess || user) {
-            dispatch(getFavourite(user._id))
+            
             dispatch(reset())
-            navigate('/')
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully'
+              })
+            setTimeout(() => {
+                navigate('/')
+                dispatch(getFavourite(user._id))
+            },3000)
+           
         }
 
     }, [user, isSuccess, isError, message, navigate, dispatch])

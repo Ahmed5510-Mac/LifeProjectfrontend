@@ -73,8 +73,20 @@ html::-webkit-scrollbar-thumb {
     height: 100%;
 }
 
+.strock
+{
+    /* color:#cec6c6 !important;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: rgba(95, 94, 29, 0.918)  */
+  
+        color: #dbdbdb !important;
+        text-shadow: #8b8a8a 1px 1px 0;
+        
+}
 .navbar .navbar-nav .nav-link {
- color:#fff;
+ color:rgb(206, 198, 198);
+ -webkit-text-stroke-width: 0.5px;
+ -webkit-text-stroke-color: rgba(95, 94, 29, 0.918);
 }
 
 .navbar .navbar-nav .nav-link.active,
@@ -162,6 +174,25 @@ html::-webkit-scrollbar-thumb {
     width: 300px;
     transition: 0.5s;
 }
+
+.userNavbar
+{
+
+    display: flex;
+    align-content: space-between;
+    align-items: baseline;
+}
+.fa-1x-user
+{
+    font-size: 22px;
+}
+.logout-lg
+{
+    outline: none;
+    padding-inline:5px;
+    border: none;
+    background-color: transparent;
+}
 /* ---------------------------------------media------------------------------------ */
 
 @media(min-width:1380px) {
@@ -217,6 +248,7 @@ html::-webkit-scrollbar-thumb {
 
     .iconmobile {
         display: block;
+        margin-left: -100px;
     }
 
     .iconLscreen {
@@ -238,10 +270,6 @@ html::-webkit-scrollbar-thumb {
 }
 
 @media(max-width:550px) {
-    .mobilesearch {
-        margin-left: -93px !important;
-        margin-right: -7px !important;
-    }
 
     .btntoggle {
         width: 40px;
@@ -260,6 +288,10 @@ html::-webkit-scrollbar-thumb {
         padding: 0;
         margin-right: -9px;
         margin-left: 0px;
+    }
+    .loguserName
+    {
+        display: none !important;
     }
 
     .iconmobile a {
@@ -283,5 +315,11 @@ html::-webkit-scrollbar-thumb {
 
     .logout-mob{
         display: none !important
+    }.userNavbar
+    {
+    
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  
     }
 }

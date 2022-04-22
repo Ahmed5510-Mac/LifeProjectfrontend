@@ -2,7 +2,6 @@ import Grid from '@mui/material/Grid'
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { Container } from '@mui/material'
 import { getTotals } from '../../../store/cart/cartSlice'
 import { getProducts } from '../../../store/product/productSlice'
@@ -10,6 +9,7 @@ import CategoryCard from '../../CategoryCard/CategoryCard'
 import OfferCard from '../../offersCard/offersCard'
 import ListSkelton from './../../Skeleton/Skeleton'
 import Skeleton from '@mui/material/Skeleton'
+import img1 from '../../../assets/cattols.png'
 
 const News = () => {
   const { products, isLoading } = useSelector((state) => state.products)
@@ -32,7 +32,7 @@ const News = () => {
       {isLoading ? (
         <Skeleton height={400} style={{ marginTop: '-6%' }} />
       ) : (
-        <CategoryCard image={result.category.image} />
+        <CategoryCard image={img1} />
       )}
       <Container>
         <Grid container spacing={5}>

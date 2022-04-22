@@ -63,7 +63,7 @@ const Registration = () => {
           <Box  sx={{display:"flex",justifyContent:"center",marginBottom:"20px" }} >
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="SignIn" sx={{ color: '#212529' }} {...a11yProps(0)} />
-              <Tab label="SignOUT" sx={{ color: '#212529' }} {...a11yProps(1)} />
+              <Tab label="SignUP" sx={{ color: '#212529' }} {...a11yProps(1)} />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
