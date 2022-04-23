@@ -34,7 +34,7 @@ export default function Deatails2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location =useLocation()
-  let myVariable =location.state.selectedProduct
+  let myVariable =location.state.selectedProduct;
   const cart = useSelector((state) => state.cart);
    
 console.log(myVariable);

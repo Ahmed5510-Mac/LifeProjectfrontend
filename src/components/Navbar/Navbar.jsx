@@ -129,7 +129,7 @@ export default function Navbar() {
           <ul className="navbar-nav ms-auto  mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
-                className="nav-link p-lg-3 active"
+                className="nav-link lg-3 active"
                 aria-current="page"
                 to="/"
               >
@@ -137,17 +137,17 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link p-lg-3" to="/about">
+              <NavLink className="nav-link lg-3" to="/about">
                 About Us
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link p-lg-3" to="/favourite">
+              <NavLink className="nav-link lg-3" to="/favourite">
                 Favourite
               </NavLink>
             </li>
             <li className="nav-item Categories position-relative">
-              <NavLink className="nav-link  p-lg-3" to="/products">
+              <NavLink className="nav-link  lg-3" to="/products">
                 Categories
               </NavLink>
               {/*----------------------- megamenue ------------------- */}
@@ -230,17 +230,17 @@ export default function Navbar() {
               }
                 <p className=" loguserName text-white strock">  {currentUser &&"Hello! "+currentUser.customer.fullName} </p>
             </div>
-            <NavLink to="/cart" className="btn mx-2  d-none d-lg-block d-flex align-items-center rounded-circle ">
+            <NavLink to="/cart" className="btn mx-1 d-none d-lg-block d-flex align-items-center rounded-circle ">
               {" "}
               <span className="fa-solid fa-cart-shopping text-white position-relative strock">
-                <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
+                <span className="position-absolute bg-danger text-light rounded-circle px-1 py-1">
                 {cart.cartTotalQuantity}
                 </span>
               </span>{" "}
             </NavLink>
 
             {user ? (
-              <button className=" logout-lg ms-2  d-md-none d-lg-block  " onClick={onLogout}>
+              <button className=" logout-lg ms-1  d-md-none d-lg-block  " onClick={onLogout}>
                 <i className="fa-solid fa-arrow-right-from-bracket text-white strock"></i>
               </button>
             ) : (
