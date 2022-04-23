@@ -7,6 +7,7 @@ import Delivery from "../../components/delivery/delivery";
 import ImageGallaryComponent from "../../components/Deatails/detailsScrollerCarasol";
 import { CardActions, Container, Rating, Typography } from "@mui/material";
 import DiscountCard from "../../components/Deatails/detailsDiscountCard";
+import ProductDetails from "../../components/Deatails/detailsProductCard";
 import CartButtons from "../../components/Deatails/detailsCartButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -151,7 +152,8 @@ console.log(myVariable);
                         } verified ratings)`}</a>
                       </Typography>
                     </Box>
-                    <DiscountCard
+                    {myVariable.discount.discountAmount === 0 ? 
+                      <ProductDetails
                       productName={myVariable.productName}
                       maxNumOfProducts={myVariable.quantity}
                       numOfProductsThatReduced={3}
@@ -160,6 +162,17 @@ console.log(myVariable);
                       myVariable.discount.discountAmount
                       }
                     />
+                   :
+                       <DiscountCard
+                      productName={myVariable.productName}
+                      maxNumOfProducts={myVariable.quantity}
+                      numOfProductsThatReduced={3}
+                      priceBefore={myVariable.price}
+                      discountPersentatge={
+                      myVariable.discount.discountAmount
+                      }
+                    />
+                    }
                     <CardActions style={{ justifyContent: "center" }}>
                       <CartButtons 
                       
