@@ -7,6 +7,8 @@ import {useEffect}from "react"
 import { toggle } from "../../store/receipts/receiptSlice";
 import { getUserInfo} from "../../store/receipts/receiptSlice"
 import {insertOrder} from "../../store/orders/ordersSlice"
+import Swal from "sweetalert2";
+
 function DeliveryMethod() {
   const user = useSelector((state)=>state.auth.user);
   const cart = useSelector((state) => state.cart)
@@ -17,6 +19,17 @@ function DeliveryMethod() {
     dispatch(getUserInfo());
   }, [dispatch]);
   
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
      
     
@@ -59,7 +72,16 @@ function DeliveryMethod() {
               <button
                 type="submit"
                 className="btn font-weight-bold-1 w-100 mb-3"
-                 onClick={()=>{dispatch(insertOrder({cart,id:user.customer._id}));}}
+                 onClick={()=>{
+                   dispatch(insertOrder({cart,id:user.customer._id}));
+                   Toast.fire({
+                    icon: 'success',
+                    title:'Your Order Is Done',
+                    text:'Check Your Profile'
+                    
+                  })
+                
+                }}
               >
                 Confirm Order
               </button>

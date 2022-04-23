@@ -12,10 +12,7 @@ import { getTotals } from '../../store/cart/cartSlice';
 import { editCustomer } from '../../store/user/userSlice';
 import Spinner from '../../components/Spinner/Spinner';
 import { useFormik } from 'formik';
-// import ListSkelton from './../../Skeleton/Skeleton'
-import Skeleton from '@mui/material/Skeleton'
 import * as Yup from 'yup';
-import ListSkelton from '../../components/Skeleton/Skeleton';
 
 
 const validationSchema = Yup.object({
@@ -31,9 +28,7 @@ const validationSchema = Yup.object({
 })
 
 
-function Receipt() {
-
-    
+function ProfileReceipt() {
     const receiptState = useSelector((state) => state.reciptSlice.value)
     const cart = useSelector((state) => state.cart);
     const { user, isSuccess, isError, isLoading } = useSelector((state) => state.auth);
@@ -105,24 +100,19 @@ function Receipt() {
         },
         validationSchema,
     })
-    // if (isLoading) {
-    //     return <Spinner />
-    // }
+    if (isLoading) {
+        return <Spinner />
+    }
 
     return (
-        isLoading ? ( 
-        <Container  marginY={7}>
-            <ListSkelton xs={{width:"100%"}}  listsToRender={2} />
-          </Container>):(
-        <Container sx={{ marginY: "5%" }}>
+        <Container sx={{ marginY: "5%"}}>
             
             <div className="container-md mob-cart-Container ">
-                <div className="row">
-                    <div className="parent col-md-8">
-
-                           { 
-                            receiptState? <DeliveryMethod/>:<div className="jumbotron border  w-100 shadow p-3 mb-5 bg-white rounde text-capitalize col-sm-12" >
-                                <h5> ADDRESS DETAILS</h5>
+                <div className="row justify-content-center">
+                    <div className="parent col-md-10">
+                         {
+                        <div className="jumbotron border  w-100 shadow p-3 mb-5 bg-white rounde text-capitalize col-sm-12" >
+                                <h5>Your Information</h5>
                                 <hr />
                                 {/* --------cart details-------- */}
                                 <div className="product-details   mb-1 pb-2">
@@ -136,15 +126,16 @@ function Receipt() {
                                                     <label htmlFor="fullName" className="form-label">Customer Name</label>
                                                     <input className='form-control' placeholder='Enter Your fullname' type="text" name='fullName'
                                                         {...formik.getFieldProps('fullName')} />
+                                                {formik.touched.fullName && formik.errors.fullName ? <div style={{color:"red"}}>{formik.errors.fullName}</div> : null}
+
                                                 </div>
-                                                {formik.touched.fullName && formik.errors.fullName ? <div className='errorForm'>{formik.errors.fullName}</div> : null}
                                             </div>
                                             {/* mobil input */}
                                             <div className="mb-3 col-sm-12 col-md-12 ">
                                                 <label htmlFor="customerPhone" className="form-label">Phone Number</label>
                                                 <input className='form-control' type="text" placeholder='Enter Your Phonenumber' name='customerPhone'
                                                     {...formik.getFieldProps('customerPhone')} />
-                                                {formik.touched.customerPhone && formik.errors.customerPhone ? <div className='errorForm'>{formik.errors.customerPhone}</div> : null}
+                                                {formik.touched.customerPhone && formik.errors.customerPhone ? <div style={{color:"red"}}>{formik.errors.customerPhone}</div> : null}
                                             </div>
 
 
@@ -154,7 +145,7 @@ function Receipt() {
                                                     <label htmlFor="customerCountry" className="form-label"> Country</label>
                                                     <input type="text" className="form-control" name='customerCountry'
                                                         {...formik.getFieldProps('customerCountry')} />
-                                        {formik.touched.customerCountry && formik.errors.customerCountry ? <div className='errorForm'>{formik.errors.customerCountry}</div> : null}
+                                        {formik.touched.customerCountry && formik.errors.customerCountry ? <div style={{color:"red"}}>{formik.errors.customerCountry}</div> : null}
                                                 </div>
                                                
                                                 <div className="mb-3 divinput col-sm-12 col-md-5 ">
@@ -162,7 +153,7 @@ function Receipt() {
                                                     <input type="taxt" className="form-control " id="exampleInputlname" name="customerCity"
                                                     {...formik.getFieldProps('customerCity')}
                                                     />
-                                        {formik.touched.customerCity && formik.errors.customerCity ? <div className='errorForm'>{formik.errors.customerCity}</div> : null}
+                                        {formik.touched.customerCity && formik.errors.customerCity ? <div style={{color:"red"}}>{formik.errors.customerCity}</div> : null}
                                                 </div>
                                             </div>
                                             <div className="name d-flex form-recipts justify-content-between">
@@ -170,7 +161,7 @@ function Receipt() {
                                                     <label htmlFor="customerStreet" className="form-label"> Street</label>
                                                     <input type="text" className="form-control" name='customerStreet'
                                                         {...formik.getFieldProps('customerStreet')} />
-                                        {formik.touched.customerStreet && formik.errors.customerStreet ? <div className='errorForm'>{formik.errors.customerStreet}</div> : null}
+                                        {formik.touched.customerStreet && formik.errors.customerStreet ? <div style={{color:"red"}}>{formik.errors.customerStreet}</div> : null}
                                                 </div>
                                                
                                                 <div className="mb-3 divinput col-sm-12 col-md-5 ">
@@ -178,7 +169,7 @@ function Receipt() {
                                                     <input type="taxt" className="form-control " id="exampleInputlname" name="customerBuilding"
                                                     {...formik.getFieldProps('customerBuilding')}
                                                     />
-                                        {formik.touched.customerBuilding && formik.errors.customerBuilding ? <div className='errorForm'>{formik.errors.customerBuilding}</div> : null}
+                                        {formik.touched.customerBuilding && formik.errors.customerBuilding ? <div style={{color:"red"}}>{formik.errors.customerBuilding}</div> : null}
                                                 </div>
                                             </div>
                                             <div className="name d-flex form-recipts justify-content-between">
@@ -186,7 +177,7 @@ function Receipt() {
                                                     <label htmlFor="customerFloor" className="form-label"> Floor Number</label>
                                                     <input type="text" className="form-control" name='customerFloor'
                                                         {...formik.getFieldProps('customerFloor')} />
-                                        {formik.touched.customerFloor && formik.errors.customerFloor ? <div className='errorForm'>{formik.errors.customerFloor}</div> : null}
+                                        {formik.touched.customerFloor && formik.errors.customerFloor ? <div style={{color:"red"}}>{formik.errors.customerFloor}</div> : null}
                                                 </div>
                                                
                                             </div>
@@ -200,28 +191,12 @@ function Receipt() {
 
                             
                             </div>
-            }
+                         }
                     </div>
-            
-                    {/* ---------cart summry----------- */}
-                     <div className="cart-order  ms-2 border col-md-3 mt-2 mt-md-0 shadow p-3 mb-5 bg-white  rounde text-capitalize h-50 ">
-                        <h5 className="d-md-block d-none"> {`YOUR ORDER(${cart.cartTotalQuantity} items)`}</h5>
-                        <hr className="d-md-block d-none" />
-                        <div className="orders">
-                               
-                                {orderCard}
-                        </div>  
-                        
-                       <PriceDetails
-                       
-                       />
-                        <button  className="btn  w-100 font-weight-bold" onClick={()=>navigate("/cart")}>MODIFY CART</button>
-                    </div> 
-
                 </div>
             </div>
         </Container>
-    ))
+    )
 }
 
-export default Receipt
+export default ProfileReceipt

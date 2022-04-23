@@ -14,6 +14,7 @@ const validationSchema = Yup.object({
     // .matches(/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,}/,'Password should be alpha numeric min 8')
 })
 
+
 const Login = ({ handleChange }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -30,6 +31,7 @@ const Login = ({ handleChange }) => {
             email: '',
             password: ''
         },
+        
         onSubmit: values => {
             console.log(values)
             const userData = {
@@ -41,9 +43,9 @@ const Login = ({ handleChange }) => {
                 console.log("error mesage")
             }
             if (isSuccess || user) {
-
+                    
                     navigate('/')
-               
+                 
                 
             }
             //  dispatch(reset())
@@ -70,15 +72,14 @@ const Login = ({ handleChange }) => {
                   toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
               })
-              
+
               Toast.fire({
                 icon: 'success',
                 title: 'Signed in successfully'
               })
-            setTimeout(() => {
+
                 navigate('/')
                 dispatch(getFavourite(user._id))
-            },3000)
            
         }
 

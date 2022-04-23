@@ -77,17 +77,23 @@ export default function Navbar() {
           </NavLink>
 
           
-          <div className="userNavbar align-items-sm-center  ">
-               {currentUser?
+          <div onClick={()=>{
+             if (user){
+                navigate('/profile')}
+                else navigate('/register')
+            
+
+            }}  className="userNavbar align-items-sm-center  ">
+               
               <NavLink to="/register" className="btn  d-lg-none text-white">
                   <i class="fa-solid fa-1x-user fa-user-check strock "></i> 
-                </NavLink> :
+                </NavLink> 
                 
-              <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
+              {/* <NavLink to="/register" className="btn  d-lg-none rounded-circle bg-white">
                   <span className="fa-solid fa-user strock text-dark"> </span>
-                </NavLink>
+                </NavLink> */}
               
-              }
+              
                 <p className=" loguserName text-white d-none">  {currentUser &&"Hello! "+currentUser.customer.fullName} </p>
             </div>
 
@@ -129,7 +135,7 @@ export default function Navbar() {
           <ul className="navbar-nav ms-auto  mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
-                className="nav-link lg-3 active"
+                className="nav-link p-lg-3 active"
                 aria-current="page"
                 to="/"
               >
@@ -137,17 +143,25 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link lg-3" to="/about">
+              <NavLink className="nav-link p-lg-3" to="/about">
                 About Us
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link lg-3" to="/favourite">
+            <li onClick={()=>{
+             if (user){
+                navigate('/profile',{
+               state:{
+                index:3
+               }
+             })}else navigate('/register')
+            
+            }} className="nav-item">
+            <NavLink className="nav-link p-lg-3" to="/profile">
                 Favourite
               </NavLink>
             </li>
             <li className="nav-item Categories position-relative">
-              <NavLink className="nav-link  lg-3" to="/products">
+              <NavLink className="nav-link  p-lg-3" to="/products">
                 Categories
               </NavLink>
               {/*----------------------- megamenue ------------------- */}
@@ -219,28 +233,28 @@ export default function Navbar() {
           <div className="iconLscreen d-flex">
             <div className="userNavbar">
                {currentUser?
-              <NavLink to="/register" className="btn  d-none  d-lg-block text-white">
+              <NavLink to={`${currentUser ? "/profile" : "/register"}`} className="btn  d-none  d-lg-block text-white">
                   <i class="fa-solid fa-1x-user fa-user-check strock "></i> 
                 </NavLink> :
                 
-              <NavLink to="/register" className="btn  d-none  d-lg-block rounded-circle bg-white">
+              <NavLink to={`${currentUser ? "/profile" : "/register"}`} className="btn  d-none  d-lg-block rounded-circle bg-white">
                   <span className="fa-solid fa-user strock text-dark"> </span>
                 </NavLink>
               
               }
                 <p className=" loguserName text-white strock">  {currentUser &&"Hello! "+currentUser.customer.fullName} </p>
             </div>
-            <NavLink to="/cart" className="btn mx-1 d-none d-lg-block d-flex align-items-center rounded-circle ">
+            <NavLink to="/cart" className="btn mx-2  d-none d-lg-block d-flex align-items-center rounded-circle ">
               {" "}
               <span className="fa-solid fa-cart-shopping text-white position-relative strock">
-                <span className="position-absolute bg-danger text-light rounded-circle px-1 py-1">
+                <span className="position-absolute bg-danger text-light rounded-circle px-2 py-1">
                 {cart.cartTotalQuantity}
                 </span>
               </span>{" "}
             </NavLink>
 
             {user ? (
-              <button className=" logout-lg ms-1  d-md-none d-lg-block  " onClick={onLogout}>
+              <button className=" logout-lg ms-2  d-md-none d-lg-block  " onClick={onLogout}>
                 <i className="fa-solid fa-arrow-right-from-bracket text-white strock"></i>
               </button>
             ) : (

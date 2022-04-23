@@ -299,7 +299,7 @@ export const authSlice = createSlice({
       const userEdit = JSON.parse(localStorage.getItem("user"))
       userEdit.customer = newUser
       localStorage.setItem("user",JSON.stringify(userEdit)) 
-      state.products = action.payload;
+
     },
     [getUsers.rejected]: (state, action) => {
       console.log(action);

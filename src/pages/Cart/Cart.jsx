@@ -25,7 +25,9 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getTotals());
-    dispatch(getUsers(user.customer._id))
+    if(user){
+      dispatch(getUsers(user.customer._id))
+    }
   }, [cart, dispatch]);
 
 

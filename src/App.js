@@ -20,10 +20,12 @@ import Favourite from './pages/favourite/favourite';
 import Tools from './components/category/tools/tools';
 import Units from './components/category/units/units';
 import Medicines from './components/category/medicines/medicines';
-import News from './pages/News/News.jsx';
+import News from './components/category/news/news';
 import Other from './components/category/other/other';
 import SearchResult from './pages/SearchResult/searchResult';
 import Receipts from './pages/receipts/receipt'
+import Profile from './pages/profile/profile';
+
 
 const App = () => {
   const [light, setLight] = React.useState(true);
@@ -37,6 +39,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Registration />} />
+            <Route path='/profile' element={<Profile/>} />
             <Route path='/contactus' element={<Contact />} />
             <Route path='/about' element={<About />} />
             <Route path='/details/:id' element={<Deatails2/>} />
@@ -47,7 +50,7 @@ const App = () => {
             <Route path='/units' element={<Units />} />
             <Route path='/medicines' element={<Medicines />} />
             <Route path='/news' element={<News />} />
-            <Route path='/others' element={<Other/>} />
+            <Route path='/others' element={<Other />} />
             <Route path='/product/:id' element={<ProductDetails />} />
             <Route path='/favourite' element={<Favourite />} />
             <Route path='/cart' element={<Cart />} />

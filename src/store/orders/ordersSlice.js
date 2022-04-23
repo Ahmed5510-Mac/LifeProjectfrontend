@@ -84,6 +84,7 @@ export const orderSlice = createSlice({
             state.error = null;
         },
         [getOrders.fulfilled]: (state, action) => {
+            
             console.log("from get fulfield", action.payload);
             state.isLoading = false;
             state.orders = action.payload;
@@ -99,7 +100,7 @@ export const orderSlice = createSlice({
             state.error = null;
         },
         [insertOrder.fulfilled]: (state, action) => {
-            console.log("from insert fulfield", action.payload);
+            console.log("from get fulfield", action);
             state.isLoading = false;
             state.error = null;
             state.orders = action.payload;
