@@ -22,8 +22,7 @@ const Home = () => {
     dispatch(getTotals());
     console.log("first");
   }, []);
-  const show=discounts &&discounts.find(({ discountAmount }) => {return discountAmount === 0})
-console.log(show);
+
     
   const offer =
  discounts &&

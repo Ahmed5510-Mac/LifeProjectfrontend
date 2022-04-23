@@ -1,6 +1,6 @@
 export default function SkillsProgress({numOfProductsThatReduced,maxNumOfProducts}) {
   
-  let leftItems=maxNumOfProducts-numOfProductsThatReduced;
+  let leftItems=maxNumOfProducts;
   let persntage=(leftItems/maxNumOfProducts) *100
 
     return (        
