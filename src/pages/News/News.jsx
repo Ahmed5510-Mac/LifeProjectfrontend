@@ -27,7 +27,7 @@ const News = () => {
                     <div className={styles.parent}>
                       <div className={styles.grow}>
                         <div className={styles.pimage} >
-                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <img src={img2} alt={"image"}loading="lazy" width="100%" height="100%"/>
                           <div className={styles.movingdiv}>
                             <h4 className={styles.textcatcard}> last New dental cources
                               <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
@@ -44,7 +44,7 @@ const News = () => {
                     <div className={styles.parent}>
                       <div className={styles.grow}>
                         <div className={styles.pimage} >
-                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <img src={img3} alt={"image"}loading="lazy" width="100%" height="100%"/>
                           <div className={styles.movingdiv}>
                             <h4 className={styles.textcatcard}> last New dental cources
                               <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
@@ -61,7 +61,7 @@ const News = () => {
                     <div className={styles.parent}>
                       <div className={styles.grow}>
                         <div className={styles.pimage} >
-                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <img src={img1} alt={"image"}loading="lazy" width="100%" height="100%"/>
                           <div className={styles.movingdiv}>
                             <h4 className={styles.textcatcard}> last New dental cources
                               <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
@@ -152,7 +152,7 @@ const News = () => {
                     <div className={styles.parent}>
                       <div className={styles.grow}>
                         <div className={styles.pimage} >
-                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <img src={img2} alt={"image"}loading="lazy" width="100%" height="100%"/>
                           <div className={styles.movingdiv}>
                             <h4 className={styles.textcatcard}> last New dental cources
                               <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
@@ -169,7 +169,7 @@ const News = () => {
                     <div className={styles.parent}>
                       <div className={styles.grow}>
                         <div className={styles.pimage} >
-                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <img src={img1} alt={"image"}loading="lazy" width="100%" height="100%"/>
                           <div className={styles.movingdiv}>
                             <h4 className={styles.textcatcard}> last New dental cources
                               <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
@@ -197,7 +197,7 @@ const News = () => {
                     <div className={styles.parent}>
                       <div className={styles.grow}>
                         <div className={styles.pimage} >
-                          <img src={img4} alt={"image"}loading="lazy" width="100%" height="100%"/>
+                          <img src={img3} alt={"image"}loading="lazy" width="100%" height="100%"/>
                           <div className={styles.movingdiv}>
                             <h4 className={styles.textcatcard}> last New dental cources
                               <p className={styles.textpara}>Lorem ipsum dolor Lorem ipsum dolor sit amet.</p>
