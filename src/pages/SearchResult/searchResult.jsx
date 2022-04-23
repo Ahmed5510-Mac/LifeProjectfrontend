@@ -44,7 +44,7 @@ export default function SearchResult() {
       })
       .map((item, index) => {
         return (
-          <Grid key={index} item xs={6} md={4} sm={6}>
+          <Grid key={index} item xs={6} md={3} sm={6}>
             <OfferCard
              product={item}
               productId={item._id}
@@ -63,10 +63,10 @@ export default function SearchResult() {
 
   return (
         <Container  disableGutters={true} sx={{ marginY: "8%", width: "100%" }}>
-          <Box sx={{ flexGrow: 1 }}>
+          <Box >
            
               
-              <Grid container item spacing={2} xs={8}>
+              <Grid container item spacing={2} xs={12}>
                 {seachCard}
               
             </Grid>

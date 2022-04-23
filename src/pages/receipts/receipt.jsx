@@ -12,8 +12,6 @@ import { editCustomer } from '../../store/user/userSlice';
 import Spinner from '../../components/Spinner/Spinner';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-
 const validationSchema = Yup.object({
     fullName: Yup.string().required('Please Enter your Fullname'),
     customerPhone: Yup.string().required('Please Enter your Phone'),
@@ -36,6 +34,7 @@ function Receipt() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getTotals());
+
     }, [cart]);
 
 
@@ -43,7 +42,6 @@ function Receipt() {
     const orderCard = cart.cartItems.map((item, index) => {
         return (<>
             <Orderes
-
                 product={item}
             />
         </>)
@@ -105,7 +103,12 @@ function Receipt() {
                     <div className="parent col-md-8">
                          {
                             receiptState? <DeliveryMethod/>:<div className="jumbotron border  w-100 shadow p-3 mb-5 bg-white rounde text-capitalize col-sm-12" >
+                                <div style={{display:"flex", justifyContent:"space-between",cursor:"pointer"}}  >
                                 <h5> ADDRESS DETAILS</h5>
+                                
+                                <i className="fa-solid fa-xmark"m={2} onClick={() => dispatch(toggle())}></i>
+                                </div>
+                               
                                 <hr />
                                 {/* --------cart details-------- */}
                                 <div className="product-details   mb-1 pb-2">
